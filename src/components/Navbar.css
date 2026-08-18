@@ -1,0 +1,285 @@
+/* ==========================================================================
+   Navbar — flutua sobre o hero, sem barra pesada.
+   ========================================================================== */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  transition:
+    background-color var(--t-base) var(--ease),
+    backdrop-filter var(--t-base) var(--ease);
+}
+
+.nav__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-7);
+  padding-block: clamp(26px, 3.2vw, 44px);
+  transition: padding-block var(--t-base) var(--ease);
+}
+
+/* Estado compacto: aparece só depois que a página rola. */
+.nav.is-scrolled {
+  background-color: var(--c-overlay);
+  backdrop-filter: blur(10px) saturate(130%);
+}
+
+.nav.is-scrolled .nav__inner {
+  padding-block: var(--sp-4);
+}
+
+/* Hairline que marca a mudança de estado. */
+.nav__rule {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--hairline);
+  background: var(--c-line);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-slow) var(--ease);
+}
+
+.nav.is-scrolled .nav__rule {
+  transform: scaleX(1);
+}
+
+/* --- Marca ---------------------------------------------------------------- */
+
+.nav__brand {
+  margin-right: auto;
+  border-radius: var(--r-xs);
+}
+
+/* --- Links ---------------------------------------------------------------- */
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--sp-5), 2.4vw, var(--sp-7));
+}
+
+.nav__link {
+  position: relative;
+  display: inline-block;
+  padding-block: var(--sp-2);
+  font-size: var(--fs-xs);
+  color: var(--c-text-dim);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--hairline);
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-base) var(--ease);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  color: var(--c-text);
+}
+
+.nav__link:hover::after,
+.nav__link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* --- CTA ------------------------------------------------------------------ */
+
+.nav__cta {
+  padding: 11px var(--sp-5);
+  border: var(--hairline) solid var(--c-line-strong);
+  border-radius: var(--r-xs);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    border-color var(--t-base) var(--ease),
+    color var(--t-base) var(--ease),
+    background-color var(--t-base) var(--ease);
+}
+
+.nav__cta:hover,
+.nav__cta:focus-visible {
+  border-color: var(--c-accent-line);
+  background-color: var(--c-accent-veil);
+  color: var(--c-accent);
+}
+
+/* --- Botão do menu mobile -------------------------------------------------- */
+
+.nav__toggle {
+  display: none;
+  width: 48px;
+  height: 48px;
+  margin-right: calc(var(--sp-3) * -1);
+  place-items: center;
+  border-radius: var(--r-xs);
+}
+
+.nav__toggle-lines {
+  display: grid;
+  gap: 6px;
+  width: 22px;
+}
+
+.nav__toggle-lines span {
+  height: var(--hairline);
+  background: var(--c-text);
+  transition: transform var(--t-base) var(--ease);
+}
+
+.nav[data-open='true'] .nav__toggle-lines span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.nav[data-open='true'] .nav__toggle-lines span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   Menu mobile
+   ========================================================================== */
+
+.navmenu {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: none;
+  background: var(--c-bg-deep);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--t-base) var(--ease),
+    visibility 0s linear var(--t-base);
+}
+
+.navmenu__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100svh;
+  padding-block: clamp(112px, 22vh, 180px) var(--sp-8);
+}
+
+.navmenu__item {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.navmenu__item:last-child {
+  border-bottom: var(--hairline) solid var(--c-line);
+}
+
+.navmenu__link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-5);
+  padding-block: var(--sp-5);
+  font-family: var(--f-display);
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-title);
+  line-height: 1.1;
+}
+
+.navmenu__index {
+  color: var(--c-text-dim);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.navmenu__link:hover .navmenu__index,
+.navmenu__link:focus-visible .navmenu__index {
+  color: var(--c-accent);
+}
+
+.navmenu__foot {
+  padding-top: var(--sp-8);
+}
+
+/* --- Breakpoints ----------------------------------------------------------- */
+
+@media (max-width: 1080px) {
+  .nav__list {
+    gap: var(--sp-5);
+  }
+}
+
+@media (max-width: 900px) {
+  .nav__nav,
+  .nav__cta {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: grid;
+  }
+
+  .navmenu {
+    display: block;
+  }
+
+  .nav[data-open='true'] {
+    background-color: var(--c-bg-deep);
+    backdrop-filter: none;
+  }
+
+  .nav[data-open='true'] .nav__rule {
+    transform: scaleX(0);
+  }
+
+  .nav[data-open='true'] .navmenu {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  /* Entrada escalonada dos itens. */
+  .navmenu__item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity var(--t-base) var(--ease),
+      transform var(--t-base) var(--ease);
+  }
+
+  .nav[data-open='true'] .navmenu__item {
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav[data-open='true'] .navmenu__item:nth-child(1) { transition-delay: 60ms; }
+  .nav[data-open='true'] .navmenu__item:nth-child(2) { transition-delay: 110ms; }
+  .nav[data-open='true'] .navmenu__item:nth-child(3) { transition-delay: 160ms; }
+  .nav[data-open='true'] .navmenu__item:nth-child(4) { transition-delay: 210ms; }
+}
+
+/* ==========================================================================
+   Estado ativo — discreto: a página atual fica clara e ganha a régua verde.
+   ========================================================================== */
+
+.nav__link.active {
+  color: var(--c-text);
+}
+
+.nav__link.active::after {
+  transform: scaleX(1);
+}
+
+.nav__cta.active {
+  border-color: var(--c-accent-line);
+  color: var(--c-accent);
+}
+
+.navmenu__link.active .navmenu__index {
+  color: var(--c-accent);
+}

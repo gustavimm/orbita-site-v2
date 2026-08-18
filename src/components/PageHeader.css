@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Abertura de página interna. Mesma respiração do hero, sem a órbita.
+   ========================================================================== */
+
+.pagehead {
+  padding-top: clamp(136px, 19vh, 216px);
+  padding-bottom: clamp(var(--sp-9), 11vh, var(--sp-11));
+}
+
+.pagehead > .wrap {
+  row-gap: clamp(var(--sp-7), 6vw, var(--sp-8));
+}
+
+.pagehead__meta {
+  grid-column: 1 / span 3;
+}
+
+.pagehead__title {
+  grid-column: 1 / span 10;
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: 1;
+  letter-spacing: var(--ls-display);
+  text-wrap: balance;
+}
+
+.pagehead__accent {
+  color: var(--c-accent);
+}
+
+.pagehead__lead {
+  grid-column: 7 / span 5;
+  max-width: 44ch;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--c-text-dim);
+}
+
+@media (max-width: 1080px) {
+  .pagehead__title {
+    grid-column: 1 / span 11;
+  }
+
+  .pagehead__lead {
+    grid-column: 5 / span 8;
+  }
+}
+
+@media (max-width: 900px) {
+  .pagehead__meta,
+  .pagehead__title {
+    grid-column: 1 / -1;
+  }
+
+  .pagehead__lead {
+    grid-column: 2 / span 5;
+  }
+}
+
+@media (max-width: 640px) {
+  .pagehead {
+    padding-top: 124px;
+    padding-bottom: var(--sp-9);
+  }
+
+  .pagehead__title {
+    font-size: clamp(2rem, 9.4vw, 3rem);
+    letter-spacing: -0.035em;
+  }
+
+  .pagehead__lead {
+    grid-column: 1 / -1;
+    max-width: 38ch;
+  }
+}

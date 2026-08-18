@@ -1,0 +1,27 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.logo__mark {
+  width: 30px;
+  height: 30px;
+  transition:
+    width var(--t-base) var(--ease),
+    height var(--t-base) var(--ease);
+}
+
+.logo__word {
+  font-family: var(--f-display);
+  font-size: 1.0625rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.015em;
+  line-height: 1;
+  color: var(--c-text);
+}
+
+.logo--compact .logo__mark {
+  width: 26px;
+  height: 26px;
+}

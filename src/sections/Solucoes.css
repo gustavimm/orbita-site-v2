@@ -1,0 +1,173 @@
+/* ==========================================================================
+   Soluções
+   Lista editorial. Divisões horizontais, títulos fortes, hover discreto.
+   ========================================================================== */
+
+.solucoes {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+/* --- Abertura -------------------------------------------------------------- */
+
+.solucoes__head {
+  row-gap: var(--sp-7);
+  margin-bottom: clamp(var(--sp-8), 8vw, var(--sp-10));
+}
+
+.solucoes__meta {
+  grid-column: 1 / span 3;
+}
+
+/* É um <h2> por hierarquia de documento, mas não deve ter peso de título:
+   tipografia de corpo, para funcionar como abertura descritiva. */
+.solucoes__lead {
+  grid-column: 7 / span 5;
+  max-width: 40ch;
+  font-family: var(--f-body);
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-lead);
+  letter-spacing: 0;
+  color: var(--c-text-dim);
+}
+
+/* --- Lista ------------------------------------------------------------------ */
+
+.solucoes__item {
+  position: relative;
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.solucoes__item:last-child {
+  border-bottom: var(--hairline) solid var(--c-line);
+}
+
+/* Linha de acento que cresce da esquerda sobre o hairline. */
+.solucoes__item::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--hairline) * -1);
+  left: 0;
+  width: 100%;
+  height: var(--hairline);
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-slow) var(--ease);
+}
+
+.solucoes__row {
+  align-items: baseline;
+  padding-block: clamp(var(--sp-8), 5.5vw, var(--sp-9));
+}
+
+.solucoes__title {
+  grid-column: 1 / span 5;
+  font-size: var(--fs-h3-lg);
+  font-weight: var(--fw-regular);
+  line-height: 1.1;
+  letter-spacing: var(--ls-title);
+}
+
+.solucoes__body {
+  grid-column: 6 / span 7;
+}
+
+.solucoes__text {
+  max-width: 56ch;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text-dim);
+  transition: color var(--t-base) var(--ease);
+}
+
+@media (hover: hover) {
+  .solucoes__item:hover::before {
+    transform: scaleX(1);
+  }
+
+  .solucoes__item:hover .solucoes__text {
+    color: var(--c-text);
+  }
+}
+
+.solucoes__notes {
+  margin-top: var(--sp-6);
+  max-width: 48ch;
+}
+
+.solucoes__note {
+  padding-block: var(--sp-3);
+  border-top: var(--hairline) solid var(--c-line-soft);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--c-text-dim);
+}
+
+/* ==========================================================================
+   Tablet
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .solucoes__lead {
+    grid-column: 6 / span 7;
+  }
+
+  .solucoes__title {
+    grid-column: 1 / span 6;
+  }
+
+  .solucoes__body {
+    grid-column: 8 / span 5;
+  }
+}
+
+@media (max-width: 900px) {
+  .solucoes__meta {
+    grid-column: 1 / -1;
+  }
+
+  .solucoes__lead {
+    grid-column: 1 / span 5;
+  }
+
+  .solucoes__row {
+    row-gap: var(--sp-4);
+  }
+
+  .solucoes__title {
+    grid-column: 1 / -1;
+  }
+
+  .solucoes__body {
+    grid-column: 2 / span 5;
+  }
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .solucoes__head {
+    margin-bottom: var(--sp-8);
+  }
+
+  .solucoes__lead {
+    grid-column: 1 / -1;
+    max-width: 34ch;
+  }
+
+  .solucoes__row {
+    row-gap: var(--sp-3);
+    padding-block: var(--sp-8);
+  }
+
+  .solucoes__body {
+    grid-column: 1 / -1;
+  }
+
+  .solucoes__text {
+    max-width: 46ch;
+  }
+}

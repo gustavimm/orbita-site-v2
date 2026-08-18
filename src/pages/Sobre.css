@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Sobre — editorial e curto. Label na margem, texto no corpo.
+   ========================================================================== */
+
+.sobre {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.sobre__item {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.sobre__item:last-child {
+  border-bottom: var(--hairline) solid var(--c-line);
+}
+
+.sobre__row {
+  align-items: baseline;
+  padding-block: clamp(var(--sp-7), 4.4vw, var(--sp-8));
+}
+
+.sobre__label {
+  grid-column: 1 / span 3;
+}
+
+.sobre__text {
+  grid-column: 5 / span 7;
+  max-width: 58ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+@media (max-width: 1080px) {
+  .sobre__text {
+    grid-column: 5 / span 8;
+  }
+}
+
+@media (max-width: 900px) {
+  .sobre__row {
+    row-gap: var(--sp-4);
+  }
+
+  .sobre__label {
+    grid-column: 1 / -1;
+  }
+
+  .sobre__text {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .sobre__text {
+    font-size: var(--fs-body);
+    max-width: 44ch;
+  }
+}

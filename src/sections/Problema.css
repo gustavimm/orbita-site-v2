@@ -1,0 +1,180 @@
+/* ==========================================================================
+   02 — Problema
+   Inventário editorial. Sem cards: numeração, hairlines e espaço.
+   ========================================================================== */
+
+.problema {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+/* --- Abertura -------------------------------------------------------------- */
+
+.problema__head {
+  row-gap: clamp(var(--sp-7), 7vw, var(--sp-9));
+  margin-bottom: clamp(var(--sp-9), 11vw, var(--sp-11));
+}
+
+.problema__meta {
+  grid-column: 1 / span 3;
+}
+
+.problema__statement {
+  grid-column: 4 / span 9;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-regular);
+  line-height: 1.08;
+  letter-spacing: var(--ls-title);
+  text-wrap: pretty;
+  max-width: 22ch;
+}
+
+/* A primeira frase recua; a ênfase fica na segunda. */
+.problema__statement-soft {
+  color: var(--c-text-dim);
+}
+
+/* --- Lista de dores --------------------------------------------------------- */
+
+.problema__item {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.problema__item:last-child {
+  border-bottom: var(--hairline) solid var(--c-line);
+}
+
+.problema__row {
+  align-items: baseline;
+  padding-block: clamp(var(--sp-6), 3.4vw, var(--sp-7));
+}
+
+.problema__index {
+  grid-column: 1 / span 1;
+  color: var(--c-text-dim);
+}
+
+.problema__title {
+  grid-column: 2 / span 5;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  line-height: 1.14;
+  letter-spacing: var(--ls-title);
+}
+
+.problema__text {
+  grid-column: 8 / span 5;
+  max-width: 42ch;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  color: var(--c-text-dim);
+}
+
+/* --- Fecho ------------------------------------------------------------------ */
+
+.problema__close {
+  margin-top: clamp(var(--sp-8), 8vw, var(--sp-10));
+}
+
+.problema__close-text {
+  position: relative;
+  grid-column: 8 / span 5;
+  padding-top: var(--sp-5);
+  max-width: 34ch;
+  font-family: var(--f-display);
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.problema__close-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 3px;
+  background: var(--c-accent);
+}
+
+/* ==========================================================================
+   Tablet
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .problema__statement {
+    grid-column: 3 / span 10;
+    max-width: 24ch;
+  }
+
+  .problema__title {
+    grid-column: 2 / span 10;
+  }
+
+  .problema__text {
+    grid-column: 2 / span 8;
+    margin-top: var(--sp-3);
+  }
+
+  .problema__close-text {
+    grid-column: 2 / span 8;
+  }
+}
+
+@media (max-width: 900px) {
+  .problema__meta {
+    grid-column: 1 / -1;
+  }
+
+  .problema__statement {
+    grid-column: 1 / -1;
+    max-width: 20ch;
+  }
+
+  .problema__title {
+    grid-column: 2 / span 5;
+  }
+
+  .problema__text {
+    grid-column: 2 / span 5;
+  }
+
+  .problema__close-text {
+    grid-column: 2 / span 5;
+  }
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .problema__head {
+    margin-bottom: var(--sp-9);
+  }
+
+  .problema__statement {
+    max-width: 100%;
+    font-size: clamp(1.75rem, 8.4vw, 2.25rem);
+  }
+
+  .problema__row {
+    row-gap: var(--sp-3);
+    padding-block: var(--sp-6);
+  }
+
+  .problema__index,
+  .problema__title,
+  .problema__text,
+  .problema__close-text {
+    grid-column: 1 / -1;
+  }
+
+  .problema__index {
+    margin-bottom: var(--sp-1);
+  }
+
+  .problema__text {
+    margin-top: 0;
+    max-width: 38ch;
+  }
+}

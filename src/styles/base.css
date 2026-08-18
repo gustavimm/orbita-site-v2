@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Órbita — reset e base tipográfica
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* A rolagem suave no elemento raiz fazia o reset de rolagem na troca de rota
+   parar a ~15px do topo, e transformava o salto do skip link em animação.
+   Nada no site depende dela hoje. */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  min-height: 100svh;
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--f-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-regular);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Trava a rolagem enquanto um overlay (menu mobile) está aberto. */
+body[data-scroll-locked='true'] {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--f-display);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-title);
+  letter-spacing: var(--ls-title);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--c-accent);
+  color: var(--c-bg-deep);
+}
+
+/* --- Foco visível ------------------------------------------------------- */
+
+:focus-visible {
+  outline: 1px solid var(--c-accent);
+  outline-offset: 4px;
+  border-radius: var(--r-xs);
+}
+
+/* O <main> só recebe foco pelo skip link. Contornar a página inteira não
+   informa nada — o indicador útil aqui é a própria rolagem até o conteúdo. */
+main:focus {
+  outline: none;
+}
+
+/* --- Utilitários de acessibilidade -------------------------------------- */
+
+.u-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--sp-4);
+  left: var(--sp-4);
+  z-index: calc(var(--z-overlay) + 1);
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--c-bg-deep);
+  border: var(--hairline) solid var(--c-accent);
+  border-radius: var(--r-xs);
+  font-size: var(--fs-sm);
+  transform: translateY(calc(-100% - var(--sp-8)));
+  transition: transform var(--t-base) var(--ease);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* --- Movimento reduzido -------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

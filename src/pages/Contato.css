@@ -1,0 +1,225 @@
+/* ==========================================================================
+   Contato — página de conversão.
+   ========================================================================== */
+
+.contato,
+.contato-canais {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.contato__head {
+  margin-bottom: clamp(var(--sp-7), 6vw, var(--sp-8));
+}
+
+.contato__meta {
+  grid-column: 1 / span 3;
+}
+
+/* --- O que esperar ---------------------------------------------------------- */
+
+.contato__item {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.contato__item:last-child {
+  border-bottom: var(--hairline) solid var(--c-line);
+}
+
+.contato__row {
+  align-items: baseline;
+  padding-block: clamp(var(--sp-6), 3.4vw, var(--sp-7));
+}
+
+.contato__index {
+  grid-column: 1 / span 1;
+  color: var(--c-text-dim);
+}
+
+.contato__text {
+  grid-column: 2 / span 7;
+  max-width: 56ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+}
+
+.contato__foot {
+  margin-top: clamp(var(--sp-7), 5vw, var(--sp-8));
+}
+
+.contato__cta {
+  grid-column: 2 / span 5;
+}
+
+/* --- Canais ------------------------------------------------------------------ */
+
+.canais__item {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.canais__item:last-child {
+  border-bottom: var(--hairline) solid var(--c-line);
+}
+
+.canais__link {
+  align-items: baseline;
+  padding-block: clamp(var(--sp-6), 3.4vw, var(--sp-7));
+  transition: color var(--t-fast) var(--ease);
+}
+
+.canais__label {
+  grid-column: 1 / span 3;
+}
+
+.canais__value {
+  grid-column: 4 / span 8;
+  font-family: var(--f-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-title);
+}
+
+.canais__link:hover .canais__value,
+.canais__link:focus-visible .canais__value {
+  color: var(--c-accent);
+}
+
+/* --- Formulário --------------------------------------------------------------
+   Contexto à esquerda, formulário num painel destacado à direita: 4 · 1 · 7.
+   Os campos ficam em src/components/ContactForm.css.
+   ---------------------------------------------------------------------------- */
+
+.contato-form {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.contato-form > .wrap {
+  row-gap: clamp(var(--sp-7), 6vw, var(--sp-8));
+}
+
+.contato-form__aside {
+  grid-column: 1 / span 4;
+  align-self: start;
+}
+
+.contato-form__title {
+  margin-top: clamp(var(--sp-6), 3vw, var(--sp-7));
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  line-height: 1.14;
+  letter-spacing: var(--ls-title);
+  text-wrap: balance;
+}
+
+.contato-form__lead {
+  margin-top: var(--sp-5);
+  max-width: 34ch;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  color: var(--c-text-dim);
+}
+
+.contato-form__alt {
+  margin-top: clamp(var(--sp-7), 4vw, var(--sp-8));
+  font-size: var(--fs-xs);
+  line-height: var(--lh-body);
+  color: var(--c-text-dim);
+}
+
+.contato-form__mail {
+  color: var(--c-text);
+  box-shadow: inset 0 -1px 0 0 var(--c-line-strong);
+  transition:
+    color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.contato-form__mail:hover,
+.contato-form__mail:focus-visible {
+  color: var(--c-accent);
+  box-shadow: inset 0 -1px 0 0 var(--c-accent);
+}
+
+/* O painel: uma superfície elevada sobre o fundo da página.
+   Sem blur, sem sombra, sem cantos arredondados de template. */
+.contato-form__panel {
+  grid-column: 6 / span 7;
+  padding: clamp(var(--sp-6), 3.4vw, var(--sp-8));
+  background: var(--c-surface);
+  border: var(--hairline) solid var(--c-line-strong);
+  border-radius: var(--r-xs);
+}
+
+/* ==========================================================================
+   Tablet e mobile
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .contato__meta {
+    grid-column: 1 / -1;
+  }
+
+  .contato__text {
+    grid-column: 2 / span 5;
+  }
+
+  .contato__cta {
+    grid-column: 2 / span 5;
+  }
+
+  .canais__label {
+    grid-column: 1 / -1;
+  }
+
+  .canais__value {
+    grid-column: 1 / -1;
+  }
+
+  .canais__link {
+    row-gap: var(--sp-3);
+  }
+}
+
+@media (max-width: 640px) {
+  .contato__row {
+    row-gap: var(--sp-3);
+  }
+
+  .contato__index,
+  .contato__text,
+  .contato__cta {
+    grid-column: 1 / -1;
+  }
+
+  .contato__text {
+    font-size: var(--fs-body);
+    max-width: 44ch;
+  }
+}
+
+/* Formulário: contexto primeiro, painel abaixo em largura total. */
+@media (max-width: 1080px) {
+  .contato-form__aside {
+    grid-column: 1 / span 5;
+  }
+
+  .contato-form__panel {
+    grid-column: 7 / span 6;
+  }
+}
+
+@media (max-width: 900px) {
+  .contato-form__aside,
+  .contato-form__panel {
+    grid-column: 1 / -1;
+  }
+
+  .contato-form__lead {
+    max-width: 46ch;
+  }
+}
+
+@media (max-width: 640px) {
+  .contato-form__panel {
+    padding: var(--sp-5);
+  }
+}

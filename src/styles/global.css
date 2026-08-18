@@ -1,0 +1,4 @@
+/* Entrada única de CSS global. Ordem importa: tokens → base → layout. */
+@import './tokens.css';
+@import './base.css';
+@import './layout.css';

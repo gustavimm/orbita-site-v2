@@ -1,0 +1,149 @@
+/* ==========================================================================
+   Footer — uma chamada, não um menu.
+   Composição ampla e assimétrica, com o bloco de identidade discreto embaixo.
+   ========================================================================== */
+
+.footer {
+  padding-block: clamp(var(--sp-9), 12vw, var(--sp-11)) var(--sp-7);
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+/* --- Chamada --------------------------------------------------------------- */
+
+.footer__call {
+  row-gap: clamp(var(--sp-7), 5vw, var(--sp-8));
+  margin-bottom: clamp(var(--sp-10), 13vw, var(--sp-12));
+}
+
+.footer__headline {
+  grid-column: 2 / span 8;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-regular);
+  line-height: 1.04;
+  letter-spacing: var(--ls-title);
+  text-wrap: balance;
+}
+
+.footer__mark {
+  color: var(--c-accent);
+}
+
+.footer__action {
+  grid-column: 2 / span 5;
+}
+
+.footer__cta {
+  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+}
+
+/* --- Rodapé do rodapé -------------------------------------------------------- */
+
+.footer__bottom {
+  align-items: center;
+  padding-top: var(--sp-5);
+  border-top: var(--hairline) solid var(--c-line);
+  row-gap: var(--sp-5);
+}
+
+.footer__brand {
+  grid-column: 1 / span 3;
+  justify-self: start;
+  border-radius: var(--r-xs);
+}
+
+.footer__meta {
+  grid-column: 5 / span 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-3) var(--sp-6);
+}
+
+.footer__social,
+.footer__domain {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+
+.footer__social {
+  box-shadow: inset 0 -1px 0 0 transparent;
+  transition:
+    color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.footer__social:hover,
+.footer__social:focus-visible {
+  color: var(--c-accent);
+  box-shadow: inset 0 -1px 0 0 var(--c-accent);
+}
+
+.footer__copy {
+  grid-column: 11 / span 2;
+  justify-self: end;
+}
+
+/* ==========================================================================
+   Tablet e mobile
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .footer__headline {
+    grid-column: 1 / span 9;
+  }
+
+  .footer__action {
+    grid-column: 1 / span 6;
+  }
+
+  .footer__meta {
+    grid-column: 5 / span 4;
+  }
+
+  .footer__copy {
+    grid-column: 10 / span 3;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer__call {
+    margin-bottom: clamp(var(--sp-9), 14vw, var(--sp-10));
+  }
+
+  .footer__headline,
+  .footer__action {
+    grid-column: 1 / -1;
+  }
+
+  .footer__bottom {
+    align-items: start;
+    row-gap: var(--sp-6);
+  }
+
+  .footer__brand,
+  .footer__meta,
+  .footer__copy {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding-block: var(--sp-9) var(--sp-7);
+  }
+
+  .footer__headline {
+    font-size: clamp(1.75rem, 8.4vw, 2.25rem);
+  }
+
+  .footer__cta {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
