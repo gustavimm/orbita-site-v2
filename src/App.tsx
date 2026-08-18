@@ -3,7 +3,7 @@ import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { RouteEffects } from './components/RouteEffects'
 import Home from './pages/Home'
-import Solucoes from './pages/Solucoes'
+import OQueResolvemos from './pages/OQueResolvemos'
 import ComoTrabalhamos from './pages/ComoTrabalhamos'
 import Sobre from './pages/Sobre'
 import Contato from './pages/Contato'
@@ -23,7 +23,12 @@ function App() {
       <main id="conteudo" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/solucoes" element={<Solucoes />} />
+          <Route path="/o-que-resolvemos" element={<OQueResolvemos />} />
+          {/* A antiga página de soluções foi substituída por 'O que resolvemos'. */}
+          <Route
+            path="/solucoes"
+            element={<Navigate to="/o-que-resolvemos" replace />}
+          />
           <Route path="/como-trabalhamos" element={<ComoTrabalhamos />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contato" element={<Contato />} />

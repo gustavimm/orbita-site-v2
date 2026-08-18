@@ -95,7 +95,7 @@ export function Navbar() {
           <ul className="nav__list">
             {NAV_LINKS.map((link) => (
               <li key={link.to}>
-                <NavLink className="nav__link" to={link.to}>
+                <NavLink className="nav__link" to={link.to} end={link.to === '/'}>
                   {link.label}
                 </NavLink>
               </li>
@@ -133,7 +133,12 @@ export function Navbar() {
           <ul className="navmenu__list">
             {NAV_LINKS.map((link, i) => (
               <li className="navmenu__item" key={link.to}>
-                <NavLink className="navmenu__link" to={link.to} onClick={dismissMenu}>
+                <NavLink
+                  className="navmenu__link"
+                  to={link.to}
+                  end={link.to === '/'}
+                  onClick={dismissMenu}
+                >
                   <span className="index navmenu__index">
                     {String(i + 1).padStart(2, '0')}
                   </span>

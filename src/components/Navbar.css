@@ -208,9 +208,15 @@
 
 /* --- Breakpoints ----------------------------------------------------------- */
 
+/* Com cinco links, a barra fica apertada antes do menu mobile: os respiros
+   encolhem em vez de a navegação quebrar. */
 @media (max-width: 1080px) {
-  .nav__list {
+  .nav__inner {
     gap: var(--sp-5);
+  }
+
+  .nav__list {
+    gap: var(--sp-4);
   }
 }
 

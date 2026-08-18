@@ -6,12 +6,14 @@ type PageHeaderProps = {
   label: string
   title: React.ReactNode
   lead?: React.ReactNode
+  /** Modificador opcional, para a página ajustar a medida do texto. */
+  className?: string
 }
 
 /** Abertura padrão das páginas internas: eyebrow, título e linha de apoio. */
-export function PageHeader({ index, label, title, lead }: PageHeaderProps) {
+export function PageHeader({ index, label, title, lead, className }: PageHeaderProps) {
   return (
-    <header className="pagehead">
+    <header className={className ? `pagehead ${className}` : 'pagehead'}>
       <div className="wrap grid">
         <div className="pagehead__meta">
           <SectionHead index={index} label={label} />

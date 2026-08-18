@@ -4,7 +4,8 @@
    ========================================================================== */
 
 export const NAV_LINKS = [
-  { to: '/solucoes', label: 'Soluções' },
+  { to: '/', label: 'Home' },
+  { to: '/o-que-resolvemos', label: 'O que resolvemos' },
   { to: '/como-trabalhamos', label: 'Como trabalhamos' },
   { to: '/sobre', label: 'Sobre' },
   { to: '/contato', label: 'Contato' },
@@ -18,6 +19,81 @@ export const EMAIL = 'weorbita@gmail.com'
 
 export const CTA_LABEL = 'Agendar diagnóstico'
 export const CTA_TO = '/contato'
+
+/* --- O que resolvemos -------------------------------------------------------
+   Situações de operação, não catálogo de tecnologia. `when` são os sinais que
+   o visitante deve reconhecer; `build`, o tipo de solução que costuma resolver;
+   `note`, a ressalva consultiva — nem todo problema pede um sistema novo.
+   --------------------------------------------------------------------------- */
+
+export const PROBLEMS = [
+  {
+    title: 'Orçamentos demorados',
+    when: [
+      'Cada proposta é montada do zero, num documento novo',
+      'O preço depende de quem lembra a regra de desconto',
+      'A resposta ao cliente espera a agenda de uma pessoa só',
+    ],
+    build:
+      'Um fluxo de orçamento com as suas regras de preço, prazo e condição já dentro. Quem atende preenche o que muda de caso para caso e a proposta sai no mesmo padrão, sem depender de quem conhece a tabela de cabeça.',
+    note: 'Nem sempre isso exige um sistema novo: às vezes o gargalo está na regra de preço, não na ferramenta.',
+  },
+  {
+    title: 'Planilhas controlando a empresa',
+    when: [
+      'Uma planilha sustenta a operação e só uma pessoa entende a estrutura',
+      'Fórmula quebrada, aba duplicada, célula sobrescrita sem aviso',
+      'Ninguém tem certeza de qual arquivo é o atual',
+    ],
+    build:
+      'Um sistema que assume o que a planilha faz hoje — as mesmas contas, as mesmas regras — com cadastro, histórico e acesso por pessoa. A planilha deixa de ser a fonte da verdade e passa a ser, no máximo, um relatório de saída.',
+    note: 'Nem toda planilha precisa deixar de existir. Algumas só precisam deixar de ser a fonte da verdade.',
+  },
+  {
+    title: 'Informações espalhadas',
+    when: [
+      'O mesmo cliente aparece no WhatsApp, no e-mail e numa planilha',
+      'Cada área trabalha com a própria versão do dado',
+      'Responder uma pergunta simples exige abrir três lugares',
+    ],
+    build:
+      'Um lugar único onde cadastro, histórico e documentos ficam juntos, atualizados no ponto em que o trabalho já acontece. Em vez de reunir a informação toda vez que alguém pergunta, todo mundo lê a mesma coisa.',
+    note: 'Em muitos casos uma integração entre o que já existe resolve, sem trocar nada de lugar.',
+  },
+  {
+    title: 'Atendimento repetitivo',
+    when: [
+      'As mesmas perguntas chegam todo dia, com respostas iguais',
+      'Alguém para o que está fazendo para repetir uma informação pronta',
+      'O primeiro contato depende de alguém estar disponível',
+    ],
+    build:
+      'Respostas e triagem automatizadas para o que é previsível, com caminho aberto para uma pessoa assim que a conversa sai do padrão. Quando há volume de texto livre que justifique, entra IA na classificação — depois do diagnóstico, nunca como ponto de partida.',
+    note: 'Antes de automatizar, vale separar o que é dúvida repetida do que é exceção.',
+  },
+  {
+    title: 'Processos manuais',
+    when: [
+      'A mesma sequência de passos é refeita toda semana, na mão',
+      'A tarefa só acontece se alguém lembrar dela',
+      'Erro de digitação e retrabalho fazem parte da rotina',
+    ],
+    build:
+      'Rotinas que rodam sozinhas, em horário definido ou a partir de um evento: geração de documento, envio de aviso, atualização de status, conferência entre duas bases. O processo continua acontecendo quando a equipe está ocupada com outra coisa.',
+    note: 'Às vezes automatizar uma única etapa resolve o problema.',
+  },
+  {
+    title: 'Sistemas que não conversam',
+    when: [
+      'O mesmo dado é digitado em duas ou três ferramentas',
+      'Dois sistemas mostram números diferentes e ninguém sabe qual vale',
+      'Existe uma exportação manual no meio do processo',
+    ],
+    build:
+      'Integração entre as ferramentas que você já usa, para o dado atravessar inteiro. Cadastro feito uma vez, sincronização no lugar da digitação repetida e fim da conferência manual entre sistemas.',
+    note: 'Cada operação exige um diagnóstico diferente: o caminho depende do que as ferramentas atuais já permitem.',
+  },
+]
 
 /* --- 02 · Problema --------------------------------------------------------- */
 
