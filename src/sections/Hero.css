@@ -157,9 +157,11 @@
     grid-column: 1 / -1;
   }
 
+  /* Centralizada e limitada: nada encosta nas bordas dentro do gutter. */
   .hero__orbit {
-    justify-self: end;
-    width: min(72vw, 300px);
+    justify-self: center;
+    width: min(68vw, 280px);
+    max-width: 100%;
   }
 
   .hero__title {
