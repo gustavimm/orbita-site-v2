@@ -12,6 +12,8 @@ const EXPECTATIONS = [
   'Se existir um caminho mais simples que um sistema, é ele que vamos apontar.',
 ]
 
+const WHATSAPP_URL = 'https://wa.me/5545988213870'
+
 export default function Contato() {
   usePageMeta(
     'Contato',
@@ -58,6 +60,37 @@ export default function Contato() {
             <CtaLink className="contato__cta" to="/como-trabalhamos">
               Ver como trabalhamos
             </CtaLink>
+          </div>
+        </div>
+      </section>
+
+      <section className="contato-wpp section">
+        <div className="wrap grid">
+          <h2 className="contato-wpp__title" data-reveal="">
+            Prefere conversar pelo WhatsApp?
+          </h2>
+
+          <div
+            className="contato-wpp__aside"
+            data-reveal=""
+            style={{ transitionDelay: '60ms' }}
+          >
+            <p className="contato-wpp__text">
+              Se for mais prático, fale diretamente com a gente. Respondemos o
+              mais rápido possível.
+            </p>
+
+            <a
+              className="cta-inline contato-wpp__cta"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Conversar no WhatsApp
+              <span className="cta-inline__arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
           </div>
         </div>
       </section>

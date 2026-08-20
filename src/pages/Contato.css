@@ -223,3 +223,71 @@
     padding: var(--sp-5);
   }
 }
+
+/* --- WhatsApp ----------------------------------------------------------------
+   Segundo canal de entrada, logo acima do formulário. Mesmo CTA textual do
+   resto do site: sem card, sem o verde do WhatsApp — o destaque continua
+   sendo o da marca.
+   ---------------------------------------------------------------------------- */
+
+.contato-wpp {
+  border-top: var(--hairline) solid var(--c-line);
+}
+
+.contato-wpp > .wrap {
+  row-gap: clamp(var(--sp-5), 3vw, var(--sp-6));
+}
+
+.contato-wpp__title {
+  grid-column: 1 / span 5;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  line-height: 1.14;
+  letter-spacing: var(--ls-title);
+  text-wrap: balance;
+}
+
+.contato-wpp__aside {
+  grid-column: 7 / span 5;
+  align-self: start;
+}
+
+.contato-wpp__text {
+  max-width: 46ch;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  color: var(--c-text-dim);
+}
+
+.contato-wpp__cta {
+  margin-top: var(--sp-4);
+}
+
+@media (max-width: 1080px) {
+  .contato-wpp__aside {
+    grid-column: 7 / span 6;
+  }
+}
+
+@media (max-width: 900px) {
+  .contato-wpp__title,
+  .contato-wpp__aside {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Mobile: alvo de toque em largura total, seta encostada na borda direita. */
+@media (max-width: 640px) {
+  .contato-wpp__text {
+    max-width: 40ch;
+  }
+
+  .contato-wpp__cta {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--sp-5);
+    padding-block: var(--sp-5);
+  }
+}
