@@ -2,7 +2,7 @@ import { PageHeader } from '../components/PageHeader'
 import { SectionHead } from '../components/SectionHead'
 import { CtaLink } from '../components/CtaLink'
 import { ContactForm } from '../components/ContactForm'
-import { CHANNELS, EMAIL } from '../content/site'
+import { EMAIL } from '../content/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 import './Contato.css'
 
@@ -122,35 +122,6 @@ export default function Contato() {
           </div>
         </div>
       </section>
-
-      {CHANNELS.length > 0 ? (
-        <section className="contato-canais section">
-          <div className="wrap">
-            <div className="contato__head grid">
-              <div className="contato__meta">
-                <SectionHead index="04" label="Outros canais" />
-              </div>
-            </div>
-
-            <ul className="canais__list">
-              {CHANNELS.map((channel) => (
-                <li className="canais__item" key={channel.href}>
-                  <a
-                    className="canais__link grid"
-                    href={channel.href}
-                    {...(channel.external
-                      ? { target: '_blank', rel: 'noreferrer' }
-                      : {})}
-                  >
-                    <span className="label canais__label">{channel.label}</span>
-                    <span className="canais__value">{channel.value}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ) : null}
     </>
   )
 }

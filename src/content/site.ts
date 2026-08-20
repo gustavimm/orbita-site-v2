@@ -205,25 +205,3 @@ export const STEPS = [
       'Com o problema entendido e a solução validada, dá para falar de escopo com honestidade. Definimos o que resolve a maior parte da dor primeiro e o que pode esperar, e só então construímos.',
   },
 ]
-
-/* --- Canais de contato ------------------------------------------------------
-   Apenas canais que existem de fato. Nunca adicionar telefone, WhatsApp ou
-   endereço sem confirmação da Órbita.
-   --------------------------------------------------------------------------- */
-
-export type Channel = {
-  label: string
-  value: string
-  href: string
-  external?: boolean
-}
-
-export const CHANNELS: Channel[] = [
-  { label: 'E-mail', value: EMAIL, href: `mailto:${EMAIL}` },
-  {
-    label: 'Instagram',
-    value: INSTAGRAM_HANDLE,
-    href: INSTAGRAM_URL,
-    external: true,
-  },
-]

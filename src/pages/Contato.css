@@ -2,8 +2,7 @@
    Contato — página de conversão.
    ========================================================================== */
 
-.contato,
-.contato-canais {
+.contato {
   border-top: var(--hairline) solid var(--c-line);
 }
 
@@ -48,39 +47,6 @@
 
 .contato__cta {
   grid-column: 2 / span 5;
-}
-
-/* --- Canais ------------------------------------------------------------------ */
-
-.canais__item {
-  border-top: var(--hairline) solid var(--c-line);
-}
-
-.canais__item:last-child {
-  border-bottom: var(--hairline) solid var(--c-line);
-}
-
-.canais__link {
-  align-items: baseline;
-  padding-block: clamp(var(--sp-6), 3.4vw, var(--sp-7));
-  transition: color var(--t-fast) var(--ease);
-}
-
-.canais__label {
-  grid-column: 1 / span 3;
-}
-
-.canais__value {
-  grid-column: 4 / span 8;
-  font-family: var(--f-display);
-  font-size: var(--fs-h3);
-  font-weight: var(--fw-regular);
-  letter-spacing: var(--ls-title);
-}
-
-.canais__link:hover .canais__value,
-.canais__link:focus-visible .canais__value {
-  color: var(--c-accent);
 }
 
 /* --- Formulário --------------------------------------------------------------
@@ -164,18 +130,6 @@
 
   .contato__cta {
     grid-column: 2 / span 5;
-  }
-
-  .canais__label {
-    grid-column: 1 / -1;
-  }
-
-  .canais__value {
-    grid-column: 1 / -1;
-  }
-
-  .canais__link {
-    row-gap: var(--sp-3);
   }
 }
 
