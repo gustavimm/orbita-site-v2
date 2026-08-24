@@ -15,7 +15,7 @@ export const SITE_URL = 'https://weorbita.com.br'
 export const SITE_DOMAIN = 'weorbita.com.br'
 export const INSTAGRAM_HANDLE = '@weorbita'
 export const INSTAGRAM_URL = 'https://instagram.com/weorbita'
-export const EMAIL = 'weorbita@gmail.com'
+export const EMAIL = 'contato@weorbita.com.br'
 
 export const CTA_LABEL = 'Agendar diagnóstico'
 export const CTA_TO = '/contato'
