@@ -1,4 +1,5 @@
 import { SectionHead } from '../components/SectionHead'
+import { CtaLink } from '../components/CtaLink'
 import { SOLUTIONS } from '../content/site'
 import './Solucoes.css'
 
@@ -7,6 +8,10 @@ type SolucoesProps = {
   label?: string
 }
 
+/**
+ * Teaser da home: título + um resumo de uma linha por frente de trabalho.
+ * O detalhamento de cada uma mora em "Como trabalhamos".
+ */
 export function Solucoes({ index, label = 'Soluções' }: SolucoesProps) {
   return (
     <section className="solucoes section" id="solucoes">
@@ -24,27 +29,20 @@ export function Solucoes({ index, label = 'Soluções' }: SolucoesProps) {
           </div>
         ) : null}
 
-        <ul className="solucoes__list">
+        <ul className="solucoes__teaser" data-reveal="" style={{ transitionDelay: '160ms' }}>
           {SOLUTIONS.map((item) => (
-            <li className="solucoes__item" key={item.title}>
-              <div className="solucoes__row grid" data-reveal="">
-                <h3 className="solucoes__title">{item.title}</h3>
-
-                <div className="solucoes__body">
-                  <p className="solucoes__text">{item.detail}</p>
-
-                  <ul className="solucoes__notes">
-                    {item.notes.map((note) => (
-                      <li className="solucoes__note" key={note}>
-                        {note}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            <li className="solucoes__teaser-item" key={item.title}>
+              <span className="solucoes__teaser-title">{item.title}</span>
+              <span className="solucoes__teaser-text">{item.text}</span>
             </li>
           ))}
         </ul>
+
+        <div className="solucoes__foot grid" data-reveal="" style={{ transitionDelay: '220ms' }}>
+          <CtaLink className="solucoes__cta" to="/como-trabalhamos">
+            Ver como trabalhamos
+          </CtaLink>
+        </div>
       </div>
     </section>
   )

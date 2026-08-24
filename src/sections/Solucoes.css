@@ -1,6 +1,7 @@
 /* ==========================================================================
    Soluções
-   Lista editorial. Divisões horizontais, títulos fortes, hover discreto.
+   Teaser da home: título + uma linha por frente de trabalho. O detalhamento
+   de cada uma mora em "Como trabalhamos".
    ========================================================================== */
 
 .solucoes {
@@ -31,77 +32,43 @@
   color: var(--c-text-dim);
 }
 
-/* --- Lista ------------------------------------------------------------------ */
+/* --- Lista compacta ---------------------------------------------------------- */
 
-.solucoes__item {
-  position: relative;
+.solucoes__teaser-item {
   border-top: var(--hairline) solid var(--c-line);
 }
 
-.solucoes__item:last-child {
+.solucoes__teaser-item:last-child {
   border-bottom: var(--hairline) solid var(--c-line);
 }
 
-/* Linha de acento que cresce da esquerda sobre o hairline. */
-.solucoes__item::before {
-  content: '';
-  position: absolute;
-  top: calc(var(--hairline) * -1);
-  left: 0;
-  width: 100%;
-  height: var(--hairline);
-  background: var(--c-accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--t-slow) var(--ease);
-}
-
-.solucoes__row {
-  align-items: baseline;
-  padding-block: clamp(var(--sp-8), 5.5vw, var(--sp-9));
-}
-
-.solucoes__title {
-  grid-column: 1 / span 5;
-  font-size: var(--fs-h3-lg);
+.solucoes__teaser-title {
+  display: block;
+  margin-top: var(--sp-5);
+  font-family: var(--f-display);
+  font-size: var(--fs-h4);
   font-weight: var(--fw-regular);
-  line-height: 1.1;
   letter-spacing: var(--ls-title);
 }
 
-.solucoes__body {
-  grid-column: 6 / span 7;
-}
-
-.solucoes__text {
-  max-width: 56ch;
-  font-size: var(--fs-body);
+.solucoes__teaser-text {
+  display: block;
+  max-width: 62ch;
+  margin-top: var(--sp-2);
+  padding-bottom: var(--sp-5);
+  font-size: var(--fs-sm);
   line-height: var(--lh-body);
   color: var(--c-text-dim);
-  transition: color var(--t-base) var(--ease);
 }
 
-@media (hover: hover) {
-  .solucoes__item:hover::before {
-    transform: scaleX(1);
-  }
+/* --- Rodapé: caminho para a página completa --------------------------------- */
 
-  .solucoes__item:hover .solucoes__text {
-    color: var(--c-text);
-  }
+.solucoes__foot {
+  margin-top: clamp(var(--sp-7), 5vw, var(--sp-8));
 }
 
-.solucoes__notes {
-  margin-top: var(--sp-6);
-  max-width: 48ch;
-}
-
-.solucoes__note {
-  padding-block: var(--sp-3);
-  border-top: var(--hairline) solid var(--c-line-soft);
-  font-size: var(--fs-xs);
-  line-height: 1.5;
-  color: var(--c-text-dim);
+.solucoes__cta {
+  grid-column: 1 / span 5;
 }
 
 /* ==========================================================================
@@ -113,12 +80,8 @@
     grid-column: 6 / span 7;
   }
 
-  .solucoes__title {
+  .solucoes__cta {
     grid-column: 1 / span 6;
-  }
-
-  .solucoes__body {
-    grid-column: 8 / span 5;
   }
 }
 
@@ -131,16 +94,8 @@
     grid-column: 1 / span 5;
   }
 
-  .solucoes__row {
-    row-gap: var(--sp-4);
-  }
-
-  .solucoes__title {
+  .solucoes__cta {
     grid-column: 1 / -1;
-  }
-
-  .solucoes__body {
-    grid-column: 2 / span 5;
   }
 }
 
@@ -158,16 +113,11 @@
     max-width: 34ch;
   }
 
-  .solucoes__row {
-    row-gap: var(--sp-3);
-    padding-block: var(--sp-8);
-  }
-
-  .solucoes__body {
-    grid-column: 1 / -1;
-  }
-
-  .solucoes__text {
+  .solucoes__teaser-text {
     max-width: 46ch;
+  }
+
+  .solucoes__foot {
+    margin-top: var(--sp-6);
   }
 }
