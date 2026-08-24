@@ -207,46 +207,40 @@
 
 /* ==========================================================================
    Etapas desdobradas
-   A trajetória acima é o panorama; aqui cada etapa se abre.
+   A trajetória acima é o panorama; aqui cada etapa vira um card — bloco
+   fechado, com sua própria hierarquia de título + pergunta + resposta curta.
    ========================================================================== */
 
 .processo__detail {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--sp-7), 5vw, var(--sp-9));
   margin-top: clamp(var(--sp-10), 12vw, var(--sp-12));
 }
 
-.processo__detail-item {
-  border-top: var(--hairline) solid var(--c-line);
+.processo__detail-card {
+  max-width: 62ch;
+  padding: clamp(var(--sp-7), 5vw, var(--sp-8)) clamp(var(--sp-6), 4vw, var(--sp-8));
+  background: var(--c-surface);
+  border: var(--hairline) solid var(--c-line);
+  border-radius: var(--r-xs);
 }
 
-.processo__detail-item:last-child {
-  border-bottom: var(--hairline) solid var(--c-line);
-}
-
-.processo__detail-row {
-  align-items: baseline;
-  padding-block: clamp(var(--sp-7), 5vw, var(--sp-9));
-}
-
-.processo__detail-index {
-  grid-column: 1 / span 1;
-  color: var(--c-text-dim);
+.processo__detail-eyebrow {
+  margin-bottom: var(--sp-5);
 }
 
 .processo__detail-title {
-  grid-column: 2 / span 4;
   font-size: var(--fs-h3);
   font-weight: var(--fw-regular);
   line-height: 1.12;
   letter-spacing: var(--ls-title);
 }
 
-.processo__detail-body {
-  grid-column: 7 / span 6;
-}
-
 /* A pergunta que a etapa existe para responder. */
 .processo__question {
   position: relative;
+  margin-top: var(--sp-6);
   padding-left: var(--sp-5);
   font-family: var(--f-display);
   font-size: var(--fs-h4);
@@ -266,59 +260,21 @@
 }
 
 .processo__detail-text {
-  margin-top: var(--sp-5);
+  margin-top: var(--sp-4);
   padding-left: var(--sp-5);
-  max-width: 54ch;
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--c-text-dim);
-}
-
-@media (max-width: 1080px) {
-  .processo__detail-title {
-    grid-column: 2 / span 5;
-  }
-
-  .processo__detail-body {
-    grid-column: 8 / span 5;
-  }
 }
 
 @media (max-width: 900px) {
   .processo__detail {
     margin-top: clamp(var(--sp-9), 12vw, var(--sp-10));
   }
-
-  .processo__detail-row {
-    row-gap: var(--sp-4);
-  }
-
-  .processo__detail-index {
-    grid-column: 1 / span 1;
-  }
-
-  .processo__detail-title {
-    grid-column: 2 / span 5;
-  }
-
-  .processo__detail-body {
-    grid-column: 2 / span 5;
-  }
 }
 
 @media (max-width: 640px) {
-  .processo__detail-index,
-  .processo__detail-title,
-  .processo__detail-body {
-    grid-column: 1 / -1;
-  }
-
-  .processo__detail-row {
-    row-gap: var(--sp-3);
-    padding-block: var(--sp-8);
-  }
-
-  .processo__detail-text {
-    max-width: 46ch;
+  .processo__detail-card {
+    padding: var(--sp-6) var(--sp-5);
   }
 }

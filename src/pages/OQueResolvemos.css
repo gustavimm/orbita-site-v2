@@ -29,71 +29,48 @@
   margin-bottom: clamp(var(--sp-8), 8vw, var(--sp-10));
 }
 
-/* --- Item -------------------------------------------------------------------- */
+/* --- Item --------------------------------------------------------------------
+   Cada situação é um card fechado: fundo elevado, borda sutil, bastante ar
+   entre um e outro — para deixar claro onde uma ideia termina e a próxima
+   começa.
+   ----------------------------------------------------------------------------- */
 
-.resolve__item {
-  position: relative;
-  border-top: var(--hairline) solid var(--c-line);
+.resolve__list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--sp-7), 5vw, var(--sp-9));
 }
 
-.resolve__item:last-child {
-  border-bottom: var(--hairline) solid var(--c-line);
+.resolve__card {
+  padding: clamp(var(--sp-7), 5vw, var(--sp-8)) clamp(var(--sp-6), 4vw, var(--sp-8));
+  background: var(--c-surface);
+  border: var(--hairline) solid var(--c-line);
+  border-radius: var(--r-xs);
 }
 
-/* Acento que cresce da esquerda sobre a hairline do próprio item. */
-.resolve__item::before {
-  content: '';
-  position: absolute;
-  top: calc(var(--hairline) * -1);
-  left: 0;
-  width: 100%;
-  height: var(--hairline);
-  background: var(--c-accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--t-slow) var(--ease);
-}
-
-@media (hover: hover) {
-  .resolve__item:hover::before {
-    transform: scaleX(1);
-  }
-
-  .resolve__item:hover .resolve__index {
-    color: var(--c-accent);
-  }
-}
-
-/* Linha 1: índice e título. Linha 2: os sinais e a resposta. */
-.resolve__row {
-  row-gap: clamp(var(--sp-6), 4vw, var(--sp-8));
-  padding-block: clamp(var(--sp-8), 5.5vw, var(--sp-9));
-}
-
-.resolve__index {
-  grid-row: 1;
-  grid-column: 1 / span 1;
-  padding-top: 0.5em;
-  transition: color var(--t-base) var(--ease);
+.resolve__eyebrow {
+  margin-bottom: var(--sp-5);
 }
 
 .resolve__title {
-  grid-row: 1;
-  grid-column: 2 / span 6;
+  max-width: 20ch;
   font-size: var(--fs-h3-lg);
   font-weight: var(--fw-regular);
   line-height: 1.1;
   letter-spacing: var(--ls-title);
 }
 
+.resolve__body {
+  margin-top: clamp(var(--sp-6), 4vw, var(--sp-7));
+  row-gap: clamp(var(--sp-6), 4vw, var(--sp-7));
+}
+
 .resolve__when {
-  grid-row: 2;
-  grid-column: 2 / span 4;
+  grid-column: 1 / span 5;
 }
 
 .resolve__build {
-  grid-row: 2;
-  grid-column: 7 / span 5;
+  grid-column: 7 / span 6;
 }
 
 .resolve__label {
@@ -198,18 +175,6 @@
     grid-column: 5 / span 8;
   }
 
-  .resolve__title {
-    grid-column: 2 / span 7;
-  }
-
-  .resolve__when {
-    grid-column: 2 / span 5;
-  }
-
-  .resolve__build {
-    grid-column: 8 / span 5;
-  }
-
   .resolve-cta__title {
     grid-column: 1 / span 5;
   }
@@ -225,21 +190,9 @@
     grid-column: 2 / span 5;
   }
 
-  .resolve__row {
-    row-gap: var(--sp-6);
-  }
-
-  .resolve__title {
-    grid-column: 2 / span 5;
-  }
-
   .resolve__when,
   .resolve__build {
-    grid-column: 2 / span 5;
-  }
-
-  .resolve__build {
-    grid-row: 3;
+    grid-column: 1 / -1;
   }
 
   .resolve-cta__title,
@@ -271,30 +224,13 @@
     margin-bottom: var(--sp-8);
   }
 
-  .resolve__row {
-    row-gap: var(--sp-5);
-    padding-block: var(--sp-8);
-  }
-
-  .resolve__index {
-    grid-column: 1 / -1;
-    padding-top: 0;
+  .resolve__card {
+    padding: var(--sp-6) var(--sp-5);
   }
 
   .resolve__title {
-    grid-row: 2;
-    grid-column: 1 / -1;
+    max-width: none;
     font-size: var(--fs-h3);
-  }
-
-  .resolve__when {
-    grid-row: 3;
-    grid-column: 1 / -1;
-  }
-
-  .resolve__build {
-    grid-row: 4;
-    grid-column: 1 / -1;
   }
 
   .resolve__label {

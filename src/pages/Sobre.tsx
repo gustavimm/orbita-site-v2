@@ -6,19 +6,19 @@ import './Sobre.css'
 const BLOCKS = [
   {
     label: 'Como pensamos',
-    text: 'A tecnologia deve se adaptar ao negócio, e não o contrário. Por isso a primeira pergunta nunca é qual ferramenta usar — é o que está travando. Um sistema só é bom se a operação continuar fazendo sentido depois que ele existir.',
+    text: 'A tecnologia deve se adaptar ao negócio, não o contrário. A primeira pergunta nunca é qual ferramenta usar — é o que está travando.',
   },
   {
     label: 'Para quem',
-    text: 'Micro e pequenas empresas. Operações onde quem decide também executa, onde não existe um time de tecnologia para intermediar e onde cada hora perdida em tarefa manual é uma hora que faltou em outro lugar.',
+    text: 'Micro e pequenas empresas — onde quem decide também executa, não existe time de tecnologia, e cada hora perdida numa tarefa manual falta em outro lugar.',
   },
   {
     label: 'Como começamos',
-    text: 'Entendendo a operação como ela é hoje, com quem trabalha nela todo dia. Só depois disso falamos em solução — porque o problema que aparece na primeira conversa raramente é o problema real.',
+    text: 'Entendendo a operação como ela é hoje, com quem trabalha nela todo dia. Só depois falamos em solução — o problema da primeira conversa raramente é o real.',
   },
   {
     label: 'O que não fazemos',
-    text: 'Não recomendamos IA quando uma regra simples resolve. Não vendemos o que o diagnóstico não pediu. E não entregamos um sistema que só funciona se a sua equipe mudar de jeito para caber nele.',
+    text: 'Não recomendamos IA quando uma regra simples resolve. Não vendemos o que o diagnóstico não pediu, nem entregamos um sistema que exige a sua equipe mudar para caber nele.',
   },
 ]
 
@@ -46,10 +46,14 @@ export default function Sobre() {
       <section className="sobre section">
         <div className="wrap">
           <ol className="sobre__list">
-            {BLOCKS.map((block) => (
+            {BLOCKS.map((block, i) => (
               <li className="sobre__item" key={block.label}>
-                <div className="sobre__row grid" data-reveal="">
-                  <p className="label sobre__label">{block.label}</p>
+                <div className="sobre__card" data-reveal="">
+                  <p className="eyebrow sobre__eyebrow">
+                    <span className="index">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="eyebrow__rule" aria-hidden="true" />
+                    <span className="label">{block.label}</span>
+                  </p>
                   <p className="sobre__text">{block.text}</p>
                 </div>
               </li>

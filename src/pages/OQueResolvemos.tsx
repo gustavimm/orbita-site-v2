@@ -48,32 +48,36 @@ export default function OQueResolvemos() {
           <ol className="resolve__list">
             {PROBLEMS.map((problem, i) => (
               <li className="resolve__item" key={problem.title}>
-                <div className="resolve__row grid" data-reveal="">
-                  <p className="index resolve__index">
-                    {String(i + 1).padStart(2, '0')}
+                <div className="resolve__card" data-reveal="">
+                  <p className="eyebrow resolve__eyebrow">
+                    <span className="index">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="eyebrow__rule" aria-hidden="true" />
+                    <span className="label">Situação</span>
                   </p>
 
                   <h2 className="resolve__title">{problem.title}</h2>
 
-                  <div className="resolve__when">
-                    <p className="label resolve__label">
-                      Quando isso costuma acontecer
-                    </p>
-                    <ul className="resolve__signs">
-                      {problem.when.map((sign) => (
-                        <li className="resolve__sign" key={sign}>
-                          {sign}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <div className="resolve__body grid">
+                    <div className="resolve__when">
+                      <p className="label resolve__label">
+                        Quando isso costuma acontecer
+                      </p>
+                      <ul className="resolve__signs">
+                        {problem.when.map((sign) => (
+                          <li className="resolve__sign" key={sign}>
+                            {sign}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  <div className="resolve__build">
-                    <p className="label resolve__label">
-                      O que normalmente construímos
-                    </p>
-                    <p className="resolve__text">{problem.build}</p>
-                    <p className="resolve__note">{problem.note}</p>
+                    <div className="resolve__build">
+                      <p className="label resolve__label">
+                        O que normalmente construímos
+                      </p>
+                      <p className="resolve__text">{problem.build}</p>
+                      <p className="resolve__note">{problem.note}</p>
+                    </div>
                   </div>
                 </div>
               </li>

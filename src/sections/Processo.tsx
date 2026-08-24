@@ -46,16 +46,16 @@ export function Processo({ index, label = 'Como trabalhamos' }: ProcessoProps) {
         <ol className="processo__detail">
           {STEPS.map((step, i) => (
             <li className="processo__detail-item" key={step.title}>
-              <div className="processo__detail-row grid" data-reveal="">
-                <span className="index processo__detail-index" aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="processo__detail-title">{step.title}</h3>
+              <div className="processo__detail-card" data-reveal="">
+                <p className="eyebrow processo__detail-eyebrow">
+                  <span className="index">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="eyebrow__rule" aria-hidden="true" />
+                  <span className="label">Etapa</span>
+                </p>
 
-                <div className="processo__detail-body">
-                  <p className="processo__question">{step.question}</p>
-                  <p className="processo__detail-text">{step.detail}</p>
-                </div>
+                <h3 className="processo__detail-title">{step.title}</h3>
+                <p className="processo__question">{step.question}</p>
+                <p className="processo__detail-text">{step.detail}</p>
               </div>
             </li>
           ))}

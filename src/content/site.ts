@@ -35,7 +35,7 @@ export const PROBLEMS = [
       'A resposta ao cliente espera a agenda de uma pessoa só',
     ],
     build:
-      'Um fluxo de orçamento com as suas regras de preço, prazo e condição já dentro. Quem atende preenche o que muda de caso para caso e a proposta sai no mesmo padrão, sem depender de quem conhece a tabela de cabeça.',
+      'Um fluxo de orçamento com as regras de preço, prazo e condição já dentro. Quem atende só preenche o que muda a cada caso, e a proposta sai sempre no mesmo padrão.',
     note: 'Nem sempre isso exige um sistema novo: às vezes o gargalo está na regra de preço, não na ferramenta.',
   },
   {
@@ -46,7 +46,7 @@ export const PROBLEMS = [
       'Ninguém tem certeza de qual arquivo é o atual',
     ],
     build:
-      'Um sistema que assume o que a planilha faz hoje — as mesmas contas, as mesmas regras — com cadastro, histórico e acesso por pessoa. A planilha deixa de ser a fonte da verdade e passa a ser, no máximo, um relatório de saída.',
+      'Um sistema que assume o que a planilha já faz — mesmas contas, mesmas regras — com cadastro, histórico e acesso por pessoa. A planilha vira, no máximo, um relatório de saída.',
     note: 'Nem toda planilha precisa deixar de existir. Algumas só precisam deixar de ser a fonte da verdade.',
   },
   {
@@ -57,7 +57,7 @@ export const PROBLEMS = [
       'Responder uma pergunta simples exige abrir três lugares',
     ],
     build:
-      'Um lugar único onde cadastro, histórico e documentos ficam juntos, atualizados no ponto em que o trabalho já acontece. Em vez de reunir a informação toda vez que alguém pergunta, todo mundo lê a mesma coisa.',
+      'Um lugar único onde cadastro, histórico e documentos ficam juntos e atualizados. Em vez de reunir a informação toda vez que alguém pergunta, todo mundo lê a mesma coisa.',
     note: 'Em muitos casos uma integração entre o que já existe resolve, sem trocar nada de lugar.',
   },
   {
@@ -68,7 +68,7 @@ export const PROBLEMS = [
       'O primeiro contato depende de alguém estar disponível',
     ],
     build:
-      'Respostas e triagem automatizadas para o que é previsível, com caminho aberto para uma pessoa assim que a conversa sai do padrão. Quando há volume de texto livre que justifique, entra IA na classificação — depois do diagnóstico, nunca como ponto de partida.',
+      'Respostas e triagem automatizadas para o que é previsível, com caminho aberto para uma pessoa assim que a conversa foge do padrão. IA entra na classificação só quando o volume justificar.',
     note: 'Antes de automatizar, vale separar o que é dúvida repetida do que é exceção.',
   },
   {
@@ -79,7 +79,7 @@ export const PROBLEMS = [
       'Erro de digitação e retrabalho fazem parte da rotina',
     ],
     build:
-      'Rotinas que rodam sozinhas, em horário definido ou a partir de um evento: geração de documento, envio de aviso, atualização de status, conferência entre duas bases. O processo continua acontecendo quando a equipe está ocupada com outra coisa.',
+      'Rotinas que rodam sozinhas, em horário definido ou a partir de um evento: geração de documento, envio de aviso, conferência entre duas bases.',
     note: 'Às vezes automatizar uma única etapa resolve o problema.',
   },
   {
@@ -90,7 +90,7 @@ export const PROBLEMS = [
       'Existe uma exportação manual no meio do processo',
     ],
     build:
-      'Integração entre as ferramentas que você já usa, para o dado atravessar inteiro. Cadastro feito uma vez, sincronização no lugar da digitação repetida e fim da conferência manual entre sistemas.',
+      'Integração entre as ferramentas que você já usa, para o dado atravessar inteiro: cadastro feito uma vez, sem digitação repetida nem conferência manual.',
     note: 'Cada operação exige um diagnóstico diferente: o caminho depende do que as ferramentas atuais já permitem.',
   },
 ]
@@ -181,27 +181,27 @@ export const STEPS = [
     text: 'Entendemos a operação como ela é hoje, antes de propor qualquer coisa.',
     question: 'Onde exatamente o tempo está indo?',
     detail:
-      'Conversamos com quem executa, não só com quem decide. Olhamos o processo real, incluindo os contornos improvisados que ninguém documentou. O objetivo é sair daqui sabendo qual é o gargalo de verdade — que muitas vezes não é o que parecia no começo.',
+      'Conversamos com quem executa, não só com quem decide, e olhamos o processo real — inclusive os contornos que ninguém documentou. Saímos sabendo qual é o gargalo de verdade.',
   },
   {
     title: 'Protótipo',
     text: 'Uma versão concreta e navegável, para você ver a solução antes de ela existir.',
     question: 'É isso mesmo que resolve?',
     detail:
-      'Em vez de descrever a solução num documento, montamos algo que dá para abrir e percorrer. Discutir uma tela concreta é muito mais barato do que discutir uma ideia abstrata, e é aqui que aparecem os detalhes que nenhuma reunião teria levantado.',
+      'Em vez de descrever a solução num documento, montamos algo que dá para abrir e percorrer. Discutir uma tela concreta é mais barato do que discutir uma ideia abstrata.',
   },
   {
     title: 'Validação / ajuste',
     text: 'Você usa e aponta o que não fecha. Corrigimos enquanto mudar ainda é barato.',
     question: 'O que ainda não fecha?',
     detail:
-      'Quem conhece a operação testa o protótipo e aponta o que não corresponde à realidade. Mudar de direção neste ponto custa uma conversa. Depois de construído, custa muito mais — por isso essa etapa não é opcional.',
+      'Quem conhece a operação testa o protótipo e aponta o que não corresponde à realidade. Mudar de direção aqui custa uma conversa — depois de construído, custa muito mais.',
   },
   {
     title: 'Implementação',
     text: 'Com o caminho validado, entram escopo, prazo e construção.',
     question: 'O que entra agora e o que fica para depois?',
     detail:
-      'Com o problema entendido e a solução validada, dá para falar de escopo com honestidade. Definimos o que resolve a maior parte da dor primeiro e o que pode esperar, e só então construímos.',
+      'Com o problema entendido e a solução validada, dá para falar de escopo com honestidade: o que resolve a maior parte da dor primeiro, o que pode esperar depois.',
   },
 ]

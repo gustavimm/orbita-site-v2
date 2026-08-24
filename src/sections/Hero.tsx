@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { OrbitSystem } from '../components/OrbitSystem'
 import { SectionHead } from '../components/SectionHead'
-import { CtaLink } from '../components/CtaLink'
 import { CTA_LABEL, CTA_TO } from '../content/site'
 import './Hero.css'
 
@@ -33,9 +33,12 @@ export function Hero() {
           </p>
 
           <div data-reveal="" style={{ transitionDelay: '240ms' }}>
-            <CtaLink className="hero__cta" to={CTA_TO}>
+            <Link className="hero__cta cta-solid" to={CTA_TO}>
               {CTA_LABEL}
-            </CtaLink>
+              <span className="cta-solid__arrow" aria-hidden="true">
+                →
+              </span>
+            </Link>
           </div>
         </div>
 
