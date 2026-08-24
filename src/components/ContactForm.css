@@ -13,6 +13,7 @@
 
 .field--problema,
 .field--retorno,
+.field--whatsapp,
 .form__action {
   grid-column: 1 / -1;
 }
@@ -67,6 +68,13 @@
 .field__textarea {
   resize: vertical;
   min-height: 7.5em;
+}
+
+/* O placeholder é dica de formato, não conteúdo: fica abaixo do texto real
+   sem cair no ilegível. */
+.field__input::placeholder {
+  color: var(--c-text-dim);
+  opacity: 0.55;
 }
 
 /* Foco: a régua vira verde e engrossa via box-shadow, sem deslocar o layout.

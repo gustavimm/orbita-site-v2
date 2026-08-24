@@ -42,12 +42,20 @@ const LIMITS = {
   empresa: 160,
   problema: 4000,
   contato: 160,
+  whatsapp: 40,
 } as const
 
 type Campo = keyof typeof LIMITS
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-const PHONE_PATTERN = /^\+?[\d\s().-]{10,}$/
+const PHONE_CHARS = /^\+?[\d\s().-]+$/
+
+/** Mesma regra do cliente: conta dígitos, aceita com ou sem DDD e sem máscara. */
+function ehTelefone(valor: string): boolean {
+  if (!PHONE_CHARS.test(valor)) return false
+  const digitos = valor.replace(/\D/g, '')
+  return digitos.length >= 8 && digitos.length <= 13
+}
 
 /**
  * Normaliza um campo recebido: descarta o que não for string, remove
@@ -85,9 +93,15 @@ function validar(dados: Record<Campo, string>): Partial<Record<Campo, string>> {
     erros.contato = 'Contato para retorno é obrigatório.'
   } else if (
     !EMAIL_PATTERN.test(dados.contato) &&
-    !PHONE_PATTERN.test(dados.contato)
+    !ehTelefone(dados.contato)
   ) {
     erros.contato = 'Informe um e-mail válido ou um telefone com DDD.'
+  }
+
+  if (dados.whatsapp.length === 0) {
+    erros.whatsapp = 'WhatsApp é obrigatório.'
+  } else if (!ehTelefone(dados.whatsapp)) {
+    erros.whatsapp = 'Número de WhatsApp inválido.'
   }
 
   return erros
@@ -107,6 +121,7 @@ function corpoTexto(d: Record<Campo, string>): string {
     `Nome: ${d.nome}`,
     `Empresa: ${d.empresa || '—'}`,
     `Contato para retorno: ${d.contato}`,
+    `WhatsApp: ${d.whatsapp}`,
     '',
     'O que mais trava o dia hoje:',
     d.problema,
@@ -126,6 +141,7 @@ function corpoHtml(d: Record<Campo, string>): string {
     ${linha('Nome', d.nome)}
     ${linha('Empresa', d.empresa || '—')}
     ${linha('Retorno', d.contato)}
+    ${linha('WhatsApp', d.whatsapp)}
   </table>
   <p style="margin:0 0 8px;color:#6b7280;font-size:13px;">O que mais trava o dia hoje</p>
   <p style="margin:0;color:#111827;font-size:15px;white-space:pre-wrap;">${escaparHtml(d.problema)}</p>
@@ -187,6 +203,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     empresa: sanitize(bruto.empresa, LIMITS.empresa),
     problema: sanitize(bruto.problema, LIMITS.problema),
     contato: sanitize(bruto.contato, LIMITS.contato),
+    whatsapp: sanitize(bruto.whatsapp, LIMITS.whatsapp),
   }
 
   const erros = validar(dados)

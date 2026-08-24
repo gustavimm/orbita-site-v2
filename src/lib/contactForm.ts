@@ -10,6 +10,7 @@ export type ContactValues = {
   empresa: string
   problema: string
   retorno: string
+  whatsapp: string
 }
 
 export type ContactField = keyof ContactValues
@@ -22,6 +23,7 @@ export const FIELD_ORDER: ContactField[] = [
   'empresa',
   'problema',
   'retorno',
+  'whatsapp',
 ]
 
 export const EMPTY_VALUES: ContactValues = {
@@ -29,11 +31,23 @@ export const EMPTY_VALUES: ContactValues = {
   empresa: '',
   problema: '',
   retorno: '',
+  whatsapp: '',
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-/** Telefone brasileiro: aceita DDD, espaços, parênteses, hífen e +55. */
-const PHONE_PATTERN = /^\+?[\d\s().-]{10,}$/
+/** Só dígitos e a pontuação que as pessoas realmente digitam num telefone. */
+const PHONE_CHARS = /^\+?[\d\s().-]+$/
+
+/**
+ * Telefone brasileiro. Conta os dígitos em vez de exigir uma máscara, então
+ * aceita `(45) 91234-5678`, `45912345678`, `+55 45 91234-5678` e o número sem
+ * DDD. A faixa vai de 8 dígitos (fixo local) a 13 (+55 com o nono).
+ */
+export function isPhone(value: string): boolean {
+  if (!PHONE_CHARS.test(value)) return false
+  const digitos = value.replace(/\D/g, '')
+  return digitos.length >= 8 && digitos.length <= 13
+}
 
 /** Validação básica no cliente. O endpoint valida de novo, por conta própria. */
 export function validateContact(values: ContactValues): ContactErrors {
@@ -50,8 +64,15 @@ export function validateContact(values: ContactValues): ContactErrors {
   const retorno = values.retorno.trim()
   if (retorno.length === 0) {
     errors.retorno = 'Precisamos de um e-mail ou telefone para responder.'
-  } else if (!EMAIL_PATTERN.test(retorno) && !PHONE_PATTERN.test(retorno)) {
+  } else if (!EMAIL_PATTERN.test(retorno) && !isPhone(retorno)) {
     errors.retorno = 'Informe um e-mail válido ou um telefone com DDD.'
+  }
+
+  const whatsapp = values.whatsapp.trim()
+  if (whatsapp.length === 0) {
+    errors.whatsapp = 'Deixe um WhatsApp — é por lá que respondemos primeiro.'
+  } else if (!isPhone(whatsapp)) {
+    errors.whatsapp = 'Confira o número: com ou sem DDD, precisa estar completo.'
   }
 
   return errors
@@ -90,6 +111,7 @@ export async function submitContact(
         empresa: values.empresa.trim(),
         problema: values.problema.trim(),
         contato: values.retorno.trim(),
+        whatsapp: values.whatsapp.trim(),
         orbita_ref: honeypot,
       }),
     })
@@ -120,6 +142,7 @@ export function buildMailtoHref(values: ContactValues): string {
     `Nome: ${values.nome.trim()}`,
     values.empresa.trim() ? `Empresa: ${values.empresa.trim()}` : null,
     `Contato para retorno: ${values.retorno.trim()}`,
+    `WhatsApp: ${values.whatsapp.trim()}`,
     '',
     'O que mais trava o dia hoje:',
     values.problema.trim(),

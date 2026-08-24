@@ -172,6 +172,33 @@ export function ContactForm() {
           ) : null}
         </div>
 
+        <div
+          className="field field--whatsapp"
+          data-invalid={Boolean(errors.whatsapp)}
+        >
+          <label className="label field__label" htmlFor="whatsapp">
+            WhatsApp
+          </label>
+          <input
+            className="field__input"
+            id="whatsapp"
+            name="whatsapp"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder="(45) 91234-5678"
+            value={values.whatsapp}
+            onChange={(event) => update('whatsapp', event.target.value)}
+            aria-invalid={Boolean(errors.whatsapp)}
+            aria-describedby={describedBy('whatsapp')}
+          />
+          {errors.whatsapp ? (
+            <p className="field__error" id="whatsapp-erro">
+              {errors.whatsapp}
+            </p>
+          ) : null}
+        </div>
+
         <div className="form__action">
           <button className="cta-solid" type="submit" disabled={sending}>
             {sending ? 'Enviando…' : 'Enviar'}

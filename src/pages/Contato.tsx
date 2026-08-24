@@ -105,7 +105,7 @@ export default function Contato() {
             </h2>
 
             <p className="contato-form__lead" data-reveal="" style={{ transitionDelay: '120ms' }}>
-              Quatro campos. Quanto mais concreto for o terceiro, mais útil
+              Cinco campos. Quanto mais concreto for o terceiro, mais útil
               fica a primeira conversa.
             </p>
 
