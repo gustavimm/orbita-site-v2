@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Aviso flutuante
+   Ancorado à viewport, então aparece mesmo com o formulário fora de vista.
+   Sem card decorativo: mesma superfície do painel, filete e ponto da marca.
+   ========================================================================== */
+
+.toast-region {
+  --toast-duration: 7000ms;
+
+  position: fixed;
+  right: clamp(var(--sp-4), 3vw, var(--sp-6));
+  bottom: clamp(var(--sp-4), 3vw, var(--sp-6));
+  z-index: calc(var(--z-overlay) + 2);
+  /* A região é só o ponto de ancoragem: nada nela recebe clique. */
+  pointer-events: none;
+}
+
+.toast {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  overflow: hidden;
+  width: min(380px, calc(100vw - var(--sp-6) * 2));
+  padding: var(--sp-5);
+  background: var(--c-surface);
+  border: var(--hairline) solid var(--c-line-strong);
+  border-radius: var(--r-xs);
+  box-shadow: 0 18px 44px rgba(5, 6, 7, 0.55);
+  pointer-events: auto;
+  animation: toast-entra var(--t-base) var(--ease) both;
+}
+
+/* Filete que drena: mostra que o aviso se fecha sozinho, sem precisar dizer. */
+.toast::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--c-accent);
+  transform-origin: left;
+  animation: toast-drena var(--toast-duration) linear both;
+}
+
+/* Ponto central da marca, com o halo discreto do anel. */
+.toast__mark {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: 0.42em;
+  border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 0 4px var(--c-accent-veil);
+}
+
+.toast__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.toast__title {
+  font-family: var(--f-display);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  color: var(--c-text);
+}
+
+.toast__text {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-xs);
+  line-height: var(--lh-body);
+  color: var(--c-text-dim);
+}
+
+.toast__close {
+  flex: none;
+  /* Compensa o padding do próprio botão, para o × alinhar com o topo do texto. */
+  margin: calc(var(--sp-2) * -1) calc(var(--sp-2) * -1) 0 0;
+  padding: var(--sp-2);
+  color: var(--c-text-dim);
+  font-size: 1.125rem;
+  line-height: 1;
+  transition: color var(--t-fast) var(--ease);
+}
+
+.toast__close:hover,
+.toast__close:focus-visible {
+  color: var(--c-text);
+}
+
+@keyframes toast-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes toast-drena {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* ==========================================================================
+   Mobile — barra na base, largura cheia e alvo de toque maior
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .toast-region {
+    left: var(--sp-4);
+    right: var(--sp-4);
+    bottom: var(--sp-4);
+  }
+
+  .toast {
+    width: 100%;
+  }
+
+  .toast__close {
+    /* 44px de alvo, sem empurrar o texto. */
+    margin: calc(var(--sp-3) * -1) calc(var(--sp-3) * -1) 0 0;
+    padding: var(--sp-3);
+  }
+}
+
+/* ==========================================================================
+   Movimento reduzido — o aviso aparece pronto e o filete não anima
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+
+  .toast::after {
+    display: none;
+  }
+}

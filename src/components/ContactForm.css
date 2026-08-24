@@ -126,10 +126,6 @@
   color: var(--c-danger);
 }
 
-.form__notice--ok {
-  color: var(--c-accent);
-}
-
 .form__mail,
 .form__open {
   color: var(--c-text);

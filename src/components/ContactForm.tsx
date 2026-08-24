@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import {
   buildMailtoHref,
   EMPTY_VALUES,
@@ -11,6 +11,7 @@ import {
   type SubmitResult,
 } from '../lib/contactForm'
 import { EMAIL } from '../content/site'
+import { Toast } from './Toast'
 import './ContactForm.css'
 
 export function ContactForm() {
@@ -18,6 +19,9 @@ export function ContactForm() {
   const [errors, setErrors] = useState<ContactErrors>({})
   const [result, setResult] = useState<SubmitResult | null>(null)
   const [sending, setSending] = useState(false)
+  // Confirmação de envio. Estado próprio, para o aviso cumprir o tempo dele
+  // mesmo que a pessoa já comece a escrever outra mensagem.
+  const [confirmado, setConfirmado] = useState(false)
   // Armadilha de spam: fora de ContactValues de propósito, para não entrar na
   // validação nem no corpo do e-mail de fallback.
   const [honeypot, setHoneypot] = useState('')
@@ -56,8 +60,12 @@ export function ContactForm() {
 
     if (outcome.status === 'sent') {
       setValues(EMPTY_VALUES)
+      setConfirmado(true)
     }
   }
+
+  // Estável, senão o timer do aviso reiniciaria a cada render.
+  const fecharConfirmacao = useCallback(() => setConfirmado(false), [])
 
   const describedBy = (field: ContactField) =>
     errors[field] ? `${field}-erro` : undefined
@@ -209,14 +217,9 @@ export function ContactForm() {
         </div>
       </div>
 
-      {/* Só declara envio concluído com resposta 2xx do endpoint. */}
+      {/* Erros ficam no fluxo, onde a pessoa pode ler com calma e agir.
+          O sucesso vai para o aviso flutuante, logo abaixo. */}
       <div className="form__status" id="form-retorno" aria-live="polite">
-        {result?.status === 'sent' ? (
-          <p className="form__notice form__notice--ok">
-            Mensagem enviada. Respondemos no contato que você deixou.
-          </p>
-        ) : null}
-
         {result?.status === 'not-configured' ? (
           <p className="form__notice">
             O envio automático ainda não está ativo neste site. Seus dados não
@@ -237,6 +240,15 @@ export function ContactForm() {
           <p className="form__notice form__notice--error">{result.message}</p>
         ) : null}
       </div>
+
+      {/* Só aparece com resposta 2xx do endpoint — nunca no clique. */}
+      <Toast
+        open={confirmado}
+        onClose={fecharConfirmacao}
+        title="Mensagem enviada."
+      >
+        Respondemos no contato que você deixou.
+      </Toast>
     </form>
   )
 }
