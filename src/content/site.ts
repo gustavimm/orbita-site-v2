@@ -22,77 +22,66 @@ export const CTA_LABEL = 'Agendar diagnóstico'
 export const CTA_TO = '/contato'
 
 /* --- O que resolvemos -------------------------------------------------------
-   Situações de operação, não catálogo de tecnologia. `when` são os sinais que
-   o visitante deve reconhecer; `build`, o tipo de solução que costuma resolver;
-   `note`, a ressalva consultiva — nem todo problema pede um sistema novo.
+   Situações de operação, não catálogo de tecnologia. `when` são fragmentos
+   curtos, sinais que o visitante deve reconhecer de relance; `build` é uma
+   única frase direta — a resposta, não um pitch.
    --------------------------------------------------------------------------- */
 
 export const PROBLEMS = [
   {
     title: 'Orçamentos demorados',
     when: [
-      'Cada proposta é montada do zero, num documento novo',
-      'O preço depende de quem lembra a regra de desconto',
-      'A resposta ao cliente espera a agenda de uma pessoa só',
+      'Proposta montada do zero a cada vez',
+      'Preço depende de quem lembra a regra',
+      'Resposta espera a agenda de uma pessoa só',
     ],
-    build:
-      'Um fluxo de orçamento com as regras de preço, prazo e condição já dentro. Quem atende só preenche o que muda a cada caso, e a proposta sai sempre no mesmo padrão.',
-    note: 'Nem sempre isso exige um sistema novo: às vezes o gargalo está na regra de preço, não na ferramenta.',
+    build: 'Um fluxo de orçamento com as regras já dentro, sempre no mesmo padrão.',
   },
   {
     title: 'Planilhas controlando a empresa',
     when: [
-      'Uma planilha sustenta a operação e só uma pessoa entende a estrutura',
-      'Fórmula quebrada, aba duplicada, célula sobrescrita sem aviso',
-      'Ninguém tem certeza de qual arquivo é o atual',
+      'Só uma pessoa entende a estrutura da planilha',
+      'Fórmula quebrada, célula sobrescrita sem aviso',
+      'Ninguém sabe qual arquivo é o atual',
     ],
-    build:
-      'Um sistema que assume o que a planilha já faz — mesmas contas, mesmas regras — com cadastro, histórico e acesso por pessoa. A planilha vira, no máximo, um relatório de saída.',
-    note: 'Nem toda planilha precisa deixar de existir. Algumas só precisam deixar de ser a fonte da verdade.',
+    build: 'Um sistema com as mesmas contas e regras, mas com histórico e acesso por pessoa.',
   },
   {
     title: 'Informações espalhadas',
     when: [
-      'O mesmo cliente aparece no WhatsApp, no e-mail e numa planilha',
-      'Cada área trabalha com a própria versão do dado',
-      'Responder uma pergunta simples exige abrir três lugares',
+      'Mesmo cliente espalhado entre WhatsApp, e-mail e planilha',
+      'Cada área usa a própria versão do dado',
+      'Uma pergunta simples exige abrir três lugares',
     ],
-    build:
-      'Um lugar único onde cadastro, histórico e documentos ficam juntos e atualizados. Em vez de reunir a informação toda vez que alguém pergunta, todo mundo lê a mesma coisa.',
-    note: 'Em muitos casos uma integração entre o que já existe resolve, sem trocar nada de lugar.',
+    build: 'Um lugar único onde cadastro, histórico e documentos ficam sempre atualizados.',
   },
   {
     title: 'Atendimento repetitivo',
     when: [
-      'As mesmas perguntas chegam todo dia, com respostas iguais',
-      'Alguém para o que está fazendo para repetir uma informação pronta',
-      'O primeiro contato depende de alguém estar disponível',
+      'Mesmas perguntas todo dia, respostas iguais',
+      'Alguém para tudo pra repetir a mesma resposta',
+      'Primeiro contato depende de alguém disponível',
     ],
     build:
-      'Respostas e triagem automatizadas para o que é previsível, com caminho aberto para uma pessoa assim que a conversa foge do padrão. IA entra na classificação só quando o volume justificar.',
-    note: 'Antes de automatizar, vale separar o que é dúvida repetida do que é exceção.',
+      'Respostas automáticas para o previsível, com caminho aberto pra uma pessoa quando foge do padrão.',
   },
   {
     title: 'Processos manuais',
     when: [
-      'A mesma sequência de passos é refeita toda semana, na mão',
-      'A tarefa só acontece se alguém lembrar dela',
-      'Erro de digitação e retrabalho fazem parte da rotina',
+      'Mesma sequência refeita toda semana, na mão',
+      'Tarefa só acontece se alguém lembrar',
+      'Erro de digitação e retrabalho na rotina',
     ],
-    build:
-      'Rotinas que rodam sozinhas, em horário definido ou a partir de um evento: geração de documento, envio de aviso, conferência entre duas bases.',
-    note: 'Às vezes automatizar uma única etapa resolve o problema.',
+    build: 'Rotinas que rodam sozinhas, em horário definido ou a partir de um evento.',
   },
   {
     title: 'Sistemas que não conversam',
     when: [
-      'O mesmo dado é digitado em duas ou três ferramentas',
-      'Dois sistemas mostram números diferentes e ninguém sabe qual vale',
-      'Existe uma exportação manual no meio do processo',
+      'Mesmo dado digitado em duas ou três ferramentas',
+      'Dois sistemas mostram números diferentes',
+      'Exportação manual no meio do processo',
     ],
-    build:
-      'Integração entre as ferramentas que você já usa, para o dado atravessar inteiro: cadastro feito uma vez, sem digitação repetida nem conferência manual.',
-    note: 'Cada operação exige um diagnóstico diferente: o caminho depende do que as ferramentas atuais já permitem.',
+    build: 'Integração entre as ferramentas que você já usa — cadastro feito uma vez só.',
   },
 ]
 

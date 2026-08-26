@@ -1,6 +1,6 @@
 /* ==========================================================================
    O que resolvemos — página de diagnóstico.
-   Título forte, sinais à esquerda e a resposta à direita.
+   Seis situações, cada uma um cartão compacto: título, sinais, resposta.
    ========================================================================== */
 
 /* --- Abertura ----------------------------------------------------------------
@@ -24,204 +24,90 @@
   border-top: var(--hairline) solid var(--c-line);
 }
 
-/* --- Item --------------------------------------------------------------------
-   Cada situação é um card fechado: fundo elevado, borda sutil, bastante ar
-   entre um e outro — para deixar claro onde uma ideia termina e a próxima
-   começa.
+/* --- Grid de situações ---------------------------------------------------------
+   Duas colunas no desktop — cabem lado a lado depois de cada card ficar
+   compacto (título + sinais + resposta, sem eyebrows nem réguas internas).
    ----------------------------------------------------------------------------- */
 
 .resolve__list {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(var(--sp-7), 5vw, var(--sp-9));
-}
-
-.resolve__title {
-  max-width: 20ch;
-  font-size: var(--fs-h3-lg);
-  font-weight: var(--fw-regular);
-  line-height: 1.1;
-  letter-spacing: var(--ls-title);
-}
-
-.resolve__body {
-  margin-top: clamp(var(--sp-6), 4vw, var(--sp-7));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--grid-gap);
   row-gap: clamp(var(--sp-6), 4vw, var(--sp-7));
 }
 
-.resolve__when {
-  grid-column: 1 / span 5;
+.resolve__title {
+  max-width: 22ch;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  line-height: 1.14;
+  letter-spacing: var(--ls-title);
 }
 
-.resolve__build {
-  grid-column: 7 / span 6;
+.resolve__content {
+  margin-top: var(--sp-5);
 }
 
-.resolve__label {
-  margin-bottom: var(--sp-5);
-}
-
-/* --- Sinais ------------------------------------------------------------------
-   O que o visitante precisa reconhecer: leitura clara, uma hairline por linha.
-   ----------------------------------------------------------------------------- */
+/* --- Sinais --------------------------------------------------------------------
+   Fragmentos curtos, sem régua entre eles — o espaço vertical já separa.
+   ------------------------------------------------------------------------------- */
 
 .resolve__signs {
-  max-width: 40ch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
 }
 
 .resolve__sign {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--sp-3);
-  padding-block: var(--sp-3);
-  border-top: var(--hairline) solid var(--c-line-soft);
+  position: relative;
+  padding-left: var(--sp-4);
   font-size: var(--fs-sm);
   line-height: 1.5;
-  color: var(--c-text);
-}
-
-.resolve__sign-icon {
-  flex: 0 0 auto;
-  display: inline-flex;
-  margin-top: 0.15em;
   color: var(--c-text-dim);
-  transition: color var(--t-base) var(--ease);
 }
 
-.resolve__sign-icon svg {
-  width: 16px;
-  height: 16px;
-  display: block;
+.resolve__sign::before {
+  content: '';
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 8px;
+  height: var(--hairline);
+  background: var(--c-line-strong);
 }
 
-.card:hover .resolve__sign-icon {
-  color: var(--c-accent);
-}
+/* --- Resposta --------------------------------------------------------------------
+   Uma frase, prefixada por seta em destaque — substitui parágrafo + eyebrow.
+   ------------------------------------------------------------------------------- */
 
-.resolve__sign:last-child {
-  border-bottom: var(--hairline) solid var(--c-line-soft);
-}
-
-.resolve__text {
-  max-width: 54ch;
+.resolve__answer {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: var(--hairline) solid var(--c-line-soft);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  color: var(--c-text-dim);
-}
-
-/* --- Caso "Sistemas que não conversam" ----------------------------------------
-   Único item da lista com apoio visual extra: ícone junto do parágrafo de
-   solução e um diagrama mostrando a transformação (hoje → com integração).
-   ----------------------------------------------------------------------------- */
-
-.resolve__build-lead {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--sp-3);
-}
-
-.resolve__build-icon {
-  flex: 0 0 auto;
-  display: inline-flex;
-  margin-top: 0.2em;
-  color: var(--c-text-dim);
-  transition: color var(--t-base) var(--ease);
-}
-
-.resolve__build-icon svg {
-  width: 20px;
-  height: 20px;
-  display: block;
-}
-
-.card:hover .resolve__build-icon {
-  color: var(--c-accent);
-}
-
-.resolve__diagram {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-5);
-  max-width: 54ch;
-  margin-top: var(--sp-6);
-  padding-top: var(--sp-5);
-  border-top: var(--hairline) solid var(--c-line-soft);
-}
-
-.resolve__diagram-caption {
-  margin-bottom: var(--sp-3);
-}
-
-.resolve__diagram-row {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-}
-
-.resolve__diagram-box {
-  flex: 0 0 auto;
-  padding: var(--sp-2) var(--sp-3);
-  border: var(--hairline) solid var(--c-line);
-  border-radius: var(--r-xs);
-  font-size: var(--fs-xs);
-  color: var(--c-text-dim);
-  white-space: nowrap;
-  transition: color var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
-}
-
-.resolve__diagram-box--accent {
-  border-color: var(--c-accent-line);
   color: var(--c-text);
 }
 
-.resolve__diagram-link {
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
-  min-width: 32px;
+.resolve__answer-arrow {
+  margin-right: var(--sp-2);
+  font-family: var(--f-display);
+  color: var(--c-accent);
 }
 
-.resolve__diagram-line {
-  flex: 1;
-  height: 0;
-  border-top: var(--hairline) dashed var(--c-line-strong);
-}
-
-.resolve__diagram-link--solid {
-  border-top: var(--hairline) solid var(--c-accent);
-}
-
-.resolve__diagram-icon {
-  flex: 0 0 auto;
-  display: inline-flex;
-  color: var(--c-text-dim);
-}
-
-.resolve__diagram-icon svg {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-
-/* --- Ressalva ----------------------------------------------------------------
-   Fecha o bloco relativizando a solução. Travessão em acento, sem ícone.
+/* --- Barra de acento -------------------------------------------------------------
+   Com 6 cards visíveis ao mesmo tempo, a barra sempre acesa anula o próprio
+   destaque. Fica invisível em repouso e só aparece no hover — reforça a
+   interação em vez de decorar todos os cards ao mesmo tempo.
    ----------------------------------------------------------------------------- */
 
-.resolve__note {
-  max-width: 48ch;
-  margin-top: var(--sp-5);
-  padding-top: var(--sp-5);
-  border-top: var(--hairline) solid var(--c-line-soft);
-  font-size: var(--fs-sm);
-  line-height: 1.55;
-  color: var(--c-text-dim);
+.resolve__card::after {
+  opacity: 0;
+  transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease);
 }
 
-.resolve__note::before {
-  content: '—';
-  margin-right: 0.5ch;
-  color: var(--c-accent);
+.resolve__card:hover::after {
+  opacity: 1;
 }
 
 /* ==========================================================================
@@ -269,8 +155,8 @@
 
 /* --- Passos da decisão --------------------------------------------------------
    Preenche o espaço vazio da seção com o processo real: entender antes de
-   avaliar, avaliar antes de decidir. Mesma trilha de linha + nó do restante
-   do site (ver .processo__track), com um ícone dentro de cada nó.
+   avaliar, avaliar antes de decidir. A linha para exatamente no último nó —
+   não estica até a borda do container.
    ----------------------------------------------------------------------------- */
 
 .resolve-cta__steps {
@@ -285,8 +171,8 @@
 .resolve-cta__steps-line {
   position: absolute;
   top: calc(var(--node) / 2);
-  left: 0;
-  right: 0;
+  left: calc(100% / 6);
+  right: calc(100% / 6);
   height: var(--hairline);
   background: var(--c-line-strong);
   transform: scaleX(0);
@@ -307,8 +193,9 @@
 .resolve-cta__step {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--sp-3);
+  text-align: center;
 }
 
 .resolve-cta__step-icon {
@@ -367,9 +254,8 @@
     grid-column: 2 / span 5;
   }
 
-  .resolve__when,
-  .resolve__build {
-    grid-column: 1 / -1;
+  .resolve__list {
+    grid-template-columns: 1fr;
   }
 
   .resolve-cta__title,
@@ -403,16 +289,6 @@
 
   .resolve__title {
     max-width: none;
-    font-size: var(--fs-h3);
-  }
-
-  .resolve__label {
-    margin-bottom: var(--sp-4);
-  }
-
-  .resolve__text,
-  .resolve__note {
-    max-width: 46ch;
   }
 
   .resolve-cta__title {
