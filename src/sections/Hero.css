@@ -70,11 +70,13 @@
 
 .hero__rail-item {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-4);
   grid-column: span 3;
   padding-top: var(--sp-5);
   border-top: var(--hairline) solid var(--c-line);
-  color: var(--c-text-dim);
-  transition: color var(--t-base) var(--ease);
 }
 
 /* Preenchimento de acento sobre a hairline do próprio item. */
@@ -91,13 +93,35 @@
   transition: transform var(--t-slow) var(--ease);
 }
 
-@media (hover: hover) {
-  .hero__rail-item:hover {
-    color: var(--c-text);
-  }
+/* Âncora visual antes do texto — mesmo vocabulário de linha fina da órbita. */
+.hero__rail-icon {
+  display: inline-flex;
+  color: var(--c-text-dim);
+  transition: color var(--t-base) var(--ease);
+}
 
+.hero__rail-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.hero__rail-label {
+  color: var(--c-text-dim);
+  transition: color var(--t-base) var(--ease);
+}
+
+@media (hover: hover) {
   .hero__rail-item:hover::after {
     transform: scaleX(1);
+  }
+
+  .hero__rail-item:hover .hero__rail-icon {
+    color: var(--c-accent);
+  }
+
+  .hero__rail-item:hover .hero__rail-label {
+    color: var(--c-text);
   }
 }
 

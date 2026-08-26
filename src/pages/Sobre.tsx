@@ -45,9 +45,9 @@ export default function Sobre() {
           <ol className="sobre__list">
             {BLOCKS.map((block) => (
               <li className="sobre__item" key={block.label}>
-                <div className="sobre__card" data-reveal="">
+                <div className="card sobre__card" data-reveal="">
                   <p className="label sobre__label">{block.label}</p>
-                  <p className="sobre__text">{block.text}</p>
+                  <p className="card__body sobre__text">{block.text}</p>
                 </div>
               </li>
             ))}

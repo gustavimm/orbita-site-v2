@@ -36,13 +36,6 @@
   gap: clamp(var(--sp-7), 5vw, var(--sp-9));
 }
 
-.resolve__card {
-  padding: clamp(var(--sp-7), 5vw, var(--sp-8)) clamp(var(--sp-6), 4vw, var(--sp-8));
-  background: var(--c-surface);
-  border: var(--hairline) solid var(--c-line);
-  border-radius: var(--r-xs);
-}
-
 .resolve__title {
   max-width: 20ch;
   font-size: var(--fs-h3-lg);
@@ -77,10 +70,32 @@
 }
 
 .resolve__sign {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
   padding-block: var(--sp-3);
   border-top: var(--hairline) solid var(--c-line-soft);
   font-size: var(--fs-sm);
   line-height: 1.5;
+  color: var(--c-text);
+}
+
+.resolve__sign-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  margin-top: 0.15em;
+  color: var(--c-text-dim);
+  transition: color var(--t-base) var(--ease);
+}
+
+.resolve__sign-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.card:hover .resolve__sign-icon {
+  color: var(--c-accent);
 }
 
 .resolve__sign:last-child {
@@ -92,6 +107,101 @@
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--c-text-dim);
+}
+
+/* --- Caso "Sistemas que não conversam" ----------------------------------------
+   Único item da lista com apoio visual extra: ícone junto do parágrafo de
+   solução e um diagrama mostrando a transformação (hoje → com integração).
+   ----------------------------------------------------------------------------- */
+
+.resolve__build-lead {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+
+.resolve__build-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  margin-top: 0.2em;
+  color: var(--c-text-dim);
+  transition: color var(--t-base) var(--ease);
+}
+
+.resolve__build-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.card:hover .resolve__build-icon {
+  color: var(--c-accent);
+}
+
+.resolve__diagram {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  max-width: 54ch;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: var(--hairline) solid var(--c-line-soft);
+}
+
+.resolve__diagram-caption {
+  margin-bottom: var(--sp-3);
+}
+
+.resolve__diagram-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.resolve__diagram-box {
+  flex: 0 0 auto;
+  padding: var(--sp-2) var(--sp-3);
+  border: var(--hairline) solid var(--c-line);
+  border-radius: var(--r-xs);
+  font-size: var(--fs-xs);
+  color: var(--c-text-dim);
+  white-space: nowrap;
+  transition: color var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
+}
+
+.resolve__diagram-box--accent {
+  border-color: var(--c-accent-line);
+  color: var(--c-text);
+}
+
+.resolve__diagram-link {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 32px;
+}
+
+.resolve__diagram-line {
+  flex: 1;
+  height: 0;
+  border-top: var(--hairline) dashed var(--c-line-strong);
+}
+
+.resolve__diagram-link--solid {
+  border-top: var(--hairline) solid var(--c-accent);
+}
+
+.resolve__diagram-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  color: var(--c-text-dim);
+}
+
+.resolve__diagram-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 /* --- Ressalva ----------------------------------------------------------------
@@ -157,6 +267,82 @@
   grid-column: 8 / span 5;
 }
 
+/* --- Passos da decisão --------------------------------------------------------
+   Preenche o espaço vazio da seção com o processo real: entender antes de
+   avaliar, avaliar antes de decidir. Mesma trilha de linha + nó do restante
+   do site (ver .processo__track), com um ícone dentro de cada nó.
+   ----------------------------------------------------------------------------- */
+
+.resolve-cta__steps {
+  --node: clamp(28px, 2.6vw, 36px);
+
+  grid-row: 3;
+  grid-column: 1 / -1;
+  position: relative;
+  margin-top: clamp(var(--sp-8), 6vw, var(--sp-9));
+}
+
+.resolve-cta__steps-line {
+  position: absolute;
+  top: calc(var(--node) / 2);
+  left: 0;
+  right: 0;
+  height: var(--hairline);
+  background: var(--c-line-strong);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 900ms var(--ease) 140ms;
+}
+
+[data-reveal='in'] .resolve-cta__steps-line {
+  transform: scaleX(1);
+}
+
+.resolve-cta__steps-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+}
+
+.resolve-cta__step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+
+.resolve-cta__step-icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--node);
+  height: var(--node);
+  border: var(--hairline) solid var(--c-line-strong);
+  border-radius: 50%;
+  background: var(--c-bg);
+  color: var(--c-text-dim);
+}
+
+.resolve-cta__step:first-child .resolve-cta__step-icon,
+.resolve-cta__step:last-child .resolve-cta__step-icon {
+  border-color: var(--c-accent);
+  color: var(--c-accent);
+}
+
+.resolve-cta__step-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.resolve-cta__step-label {
+  font-family: var(--f-display);
+  font-size: var(--fs-body);
+  color: var(--c-text);
+}
+
 /* ==========================================================================
    Tablet
    ========================================================================== */
@@ -199,6 +385,10 @@
   .resolve-cta__action {
     grid-row: 3;
   }
+
+  .resolve-cta__steps {
+    grid-row: 4;
+  }
 }
 
 /* ==========================================================================
@@ -209,10 +399,6 @@
   .pagehead--resolve .pagehead__lead {
     grid-column: 1 / -1;
     max-width: 38ch;
-  }
-
-  .resolve__card {
-    padding: var(--sp-6) var(--sp-5);
   }
 
   .resolve__title {

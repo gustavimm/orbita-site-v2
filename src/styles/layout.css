@@ -272,3 +272,74 @@
 .cta-outline:focus-visible .cta-solid__arrow {
   transform: translateX(6px);
 }
+
+/* --- Cartão padrão ----------------------------------------------------------
+   Bloco de conteúdo fechado (situação, etapa, sobre). Barra de acento à
+   esquerda e leve deslocamento do conteúdo no hover — sinaliza destaque
+   sem depender de sombra, elevação ou glow.
+   ------------------------------------------------------------------------- */
+
+.card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(var(--sp-7), 5vw, var(--sp-8)) clamp(var(--sp-6), 4vw, var(--sp-8));
+  background: var(--c-surface);
+  border-radius: var(--r-xs);
+}
+
+/* Inset de 1px: o fundo do próprio .card sobra como moldura fina ao redor
+   desta camada interna, mais funda. */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0.0625rem;
+  z-index: 2;
+  border-radius: calc(var(--r-xs) - 0.0625rem);
+  background: var(--c-bg-deep);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0.65rem auto 0.65rem 0.5rem;
+  z-index: 4;
+  width: 0.2rem;
+  border-radius: 1px;
+  background: var(--c-accent);
+  transition: transform var(--t-base) var(--ease);
+}
+
+.card:hover::after {
+  transform: translateX(0.15rem);
+}
+
+.card__title {
+  position: relative;
+  z-index: 5;
+  color: var(--c-text);
+  font-family: var(--f-display);
+  transition: transform var(--t-base) var(--ease);
+}
+
+.card:hover .card__title {
+  transform: translateX(0.15rem);
+}
+
+.card__body {
+  position: relative;
+  z-index: 5;
+  color: var(--c-text-dim);
+  font-family: var(--f-body);
+  transition: transform var(--t-base) var(--ease);
+}
+
+.card:hover .card__body {
+  transform: translateX(0.25rem);
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: var(--sp-6) var(--sp-5);
+  }
+}
