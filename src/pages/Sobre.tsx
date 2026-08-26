@@ -31,8 +31,6 @@ export default function Sobre() {
   return (
     <>
       <PageHeader
-        index="01"
-        label="Sobre"
         title={
           <>
             Não começamos pelo código.
@@ -46,14 +44,10 @@ export default function Sobre() {
       <section className="sobre section">
         <div className="wrap">
           <ol className="sobre__list">
-            {BLOCKS.map((block, i) => (
+            {BLOCKS.map((block) => (
               <li className="sobre__item" key={block.label}>
                 <div className="sobre__card" data-reveal="">
-                  <p className="eyebrow sobre__eyebrow">
-                    <span className="index">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="eyebrow__rule" aria-hidden="true" />
-                    <span className="label">{block.label}</span>
-                  </p>
+                  <p className="label sobre__label">{block.label}</p>
                   <p className="sobre__text">{block.text}</p>
                 </div>
               </li>
@@ -62,7 +56,7 @@ export default function Sobre() {
         </div>
       </section>
 
-      <ContatoCta index="02" />
+      <ContatoCta />
     </>
   )
 }

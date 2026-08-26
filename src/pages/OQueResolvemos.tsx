@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
-import { SectionHead } from '../components/SectionHead'
 import { CTA_LABEL, CTA_TO, PROBLEMS } from '../content/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 import './OQueResolvemos.css'
@@ -15,8 +14,6 @@ export default function OQueResolvemos() {
     <>
       <PageHeader
         className="pagehead--resolve"
-        index="01"
-        label="O que resolvemos"
         title={
           <>
             O problema quase nunca
@@ -41,20 +38,10 @@ export default function OQueResolvemos() {
 
       <section className="resolve section">
         <div className="wrap">
-          <div className="resolve__head">
-            <SectionHead index="02" label="Situações comuns" />
-          </div>
-
           <ol className="resolve__list">
-            {PROBLEMS.map((problem, i) => (
+            {PROBLEMS.map((problem) => (
               <li className="resolve__item" key={problem.title}>
                 <div className="resolve__card" data-reveal="">
-                  <p className="eyebrow resolve__eyebrow">
-                    <span className="index">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="eyebrow__rule" aria-hidden="true" />
-                    <span className="label">Situação</span>
-                  </p>
-
                   <h2 className="resolve__title">{problem.title}</h2>
 
                   <div className="resolve__body grid">

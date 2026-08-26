@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B0D11" />
 
+    <!--
+      Aplica o tema salvo (ou a preferência do sistema, na primeira visita)
+      antes do primeiro paint — sem isso, a página escura pisca em claro
+      (ou vice-versa) assim que o React monta.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('orbita-theme')
+          var theme =
+            stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+
+          if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light')
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F4F5F7')
+          }
+        } catch (e) {}
+      })()
+    </script>
+
     <title>Órbita — Seu negócio no centro</title>
     <meta
       name="description"

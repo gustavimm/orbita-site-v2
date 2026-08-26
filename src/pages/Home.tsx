@@ -15,8 +15,8 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Problema index="02" />
-      <Solucoes index="03" />
+      <Problema />
+      <Solucoes />
     </>
   )
 }

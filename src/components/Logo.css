@@ -4,9 +4,13 @@
   gap: var(--sp-3);
 }
 
+/* O PNG oficial vem com fundo escuro sólido, sem alpha — nos dois temas,
+   a marca vive sobre esse fundo próprio, como um selo, em vez de aparecer
+   como um quadrado cortado sobre o fundo da página. */
 .logo__mark {
   width: 30px;
   height: 30px;
+  border-radius: var(--r-xs);
   transition:
     width var(--t-base) var(--ease),
     height var(--t-base) var(--ease);

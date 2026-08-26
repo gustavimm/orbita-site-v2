@@ -6,14 +6,6 @@
   border-top: var(--hairline) solid var(--c-line);
 }
 
-.contato__head {
-  margin-bottom: clamp(var(--sp-7), 6vw, var(--sp-8));
-}
-
-.contato__meta {
-  grid-column: 1 / span 3;
-}
-
 /* --- O que esperar ---------------------------------------------------------- */
 
 .contato__item {
@@ -68,7 +60,6 @@
 }
 
 .contato-form__title {
-  margin-top: clamp(var(--sp-6), 3vw, var(--sp-7));
   font-size: var(--fs-h3);
   font-weight: var(--fw-regular);
   line-height: 1.14;
@@ -120,10 +111,6 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .contato__meta {
-    grid-column: 1 / -1;
-  }
-
   .contato__text {
     grid-column: 2 / span 5;
   }

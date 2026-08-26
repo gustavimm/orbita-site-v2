@@ -149,23 +149,6 @@
   scroll-margin-top: clamp(80px, 12vh, 120px);
 }
 
-/* --- Cabeçalho de seção ---------------------------------------------------
-   Índice · hairline · label. Compartilhado entre o hero e todas as seções.
-   ------------------------------------------------------------------------- */
-
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-4);
-}
-
-.eyebrow__rule {
-  flex: none;
-  width: clamp(24px, 4vw, 56px);
-  height: var(--hairline);
-  background: var(--c-line-strong);
-}
-
 /* --- CTA sólido -----------------------------------------------------------
    Uso mais forte do acento, reservado ao momento de conversão.
    ------------------------------------------------------------------------- */
@@ -184,15 +167,39 @@
   font-weight: var(--fw-medium);
   line-height: 1;
   letter-spacing: -0.01em;
+  /* Brilho interno (luz vinda de cima) + sombra de apoio: profundidade
+     sutil de botão físico, não um efeito chamativo. */
+  box-shadow:
+    inset 0 0.18rem 0.35rem var(--cta-shine),
+    inset 0 -0.1rem 0.2rem var(--cta-edge),
+    0 0.3rem 0.6rem var(--cta-ambient),
+    0 0.08rem 0.16rem var(--cta-contact);
   transition:
     background-color var(--t-base) var(--ease),
-    color var(--t-base) var(--ease);
+    color var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease),
+    transform var(--t-fast) var(--ease);
 }
 
+/* Fantasma no hover, como já era — sem preenchimento, sem sombra de luz
+   (não há superfície sólida pra ela iluminar). */
 .cta-solid:hover,
 .cta-solid:focus-visible {
   background: transparent;
   color: var(--c-accent);
+  box-shadow: none;
+}
+
+/* Pressionado: volta a ficar sólido e "afunda" — a luz que vinha de cima
+   dá lugar à sombra, o botão desce 1px. */
+.cta-solid:active {
+  background: var(--c-accent);
+  color: var(--c-bg-deep);
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 0.22rem 0.4rem var(--cta-edge),
+    inset 0 -0.1rem 0.2rem var(--cta-shine-soft),
+    0 0.08rem 0.16rem var(--cta-contact);
 }
 
 .cta-solid__arrow {

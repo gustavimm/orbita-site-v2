@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Logo } from './Logo'
 import { CtaLink } from './CtaLink'
+import { ThemeToggle } from './ThemeToggle'
 import { useScrolled } from '../hooks/useScrolled'
 import { CTA_LABEL, CTA_TO, NAV_LINKS } from '../content/site'
 import './Navbar.css'
@@ -102,6 +103,8 @@ export function Navbar() {
             ))}
           </ul>
         </nav>
+
+        <ThemeToggle />
 
         <NavLink className="nav__cta" to={CTA_TO}>
           {CTA_LABEL}

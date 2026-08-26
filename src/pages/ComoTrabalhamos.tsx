@@ -1,6 +1,5 @@
 import { PageHeader } from '../components/PageHeader'
 import { Processo } from '../sections/Processo'
-import { ContatoCta } from '../sections/ContatoCta'
 import { usePageMeta } from '../hooks/usePageMeta'
 
 export default function ComoTrabalhamos() {
@@ -12,8 +11,6 @@ export default function ComoTrabalhamos() {
   return (
     <>
       <PageHeader
-        index="01"
-        label="Como trabalhamos"
         title={
           <>
             Quatro etapas entre o problema
@@ -22,8 +19,7 @@ export default function ComoTrabalhamos() {
         }
         lead="Cada etapa existe para responder uma pergunta. Enquanto a pergunta não estiver respondida, não faz sentido avançar."
       />
-      <Processo index="02" label="O caminho" />
-      <ContatoCta index="03" />
+      <Processo />
     </>
   )
 }

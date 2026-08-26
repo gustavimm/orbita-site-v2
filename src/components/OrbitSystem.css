@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Sistema orbital — traços de 1px, movimento longo e discreto.
+   Sistema orbital — elipses inclinadas, traços de 1px, movimento longo.
    ========================================================================== */
 
 .orbit {
@@ -8,59 +8,49 @@
   overflow: visible;
 }
 
+/* Cor sólida (não hairline translúcida) — a órbita é o símbolo da marca,
+   precisa se impor à primeira vista nos dois temas, não só sugerir um traço. */
 .orbit__ring {
-  stroke: var(--c-line-soft);
-  stroke-width: 1;
+  fill: none;
+  stroke: var(--c-text-dim);
   vector-effect: non-scaling-stroke;
 }
 
-.orbit__ring--mid {
-  stroke: var(--c-line);
+.orbit__ring--a {
+  stroke-width: 2.4;
 }
 
-.orbit__ring--inner {
-  stroke: var(--c-line);
-  stroke-dasharray: 2 7;
+.orbit__ring--b {
+  stroke-width: 2;
 }
 
-.orbit__ticks path {
-  stroke: var(--c-line-strong);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.orbit__arc {
-  stroke: var(--c-accent);
-  stroke-width: 1.25;
-  opacity: 0.55;
-  vector-effect: non-scaling-stroke;
-  transform-box: view-box;
-  transform-origin: 240px 240px;
-  animation: orbit-spin 64s linear infinite reverse;
+.orbit__ring--c {
+  stroke-width: 1.6;
 }
 
 .orbit__sat {
-  fill: var(--c-text);
-  fill-opacity: 0.5;
   transform-box: view-box;
   transform-origin: 240px 240px;
 }
 
-.orbit__sat--outer {
+.orbit__sat--a {
   animation: orbit-spin 96s linear infinite;
 }
 
-.orbit__sat--mid {
+.orbit__sat--b {
   animation: orbit-spin 64s linear infinite reverse;
 }
 
-.orbit__sat--inner {
+.orbit__sat--c {
   animation: orbit-spin 44s linear infinite;
+}
+
+.orbit__sat-trail {
+  fill: var(--c-accent);
 }
 
 .orbit__sat-dot {
   fill: var(--c-accent);
-  fill-opacity: 1;
 }
 
 .orbit__core {
@@ -70,25 +60,9 @@
 .orbit__core-halo {
   fill: none;
   stroke: var(--c-accent);
-  stroke-width: 1;
+  stroke-width: 1.5;
   opacity: 0.35;
   vector-effect: non-scaling-stroke;
-}
-
-.orbit__annotation path,
-.orbit__annotation circle {
-  stroke: var(--c-line-strong);
-  stroke-width: 1;
-  fill: none;
-  vector-effect: non-scaling-stroke;
-}
-
-.orbit__annotation text {
-  fill: var(--c-text-dim);
-  font-family: var(--f-body);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 1.8px;
 }
 
 @keyframes orbit-spin {
@@ -99,16 +73,16 @@
 
 /* Mobile: menos camadas, mesma ideia. */
 @media (max-width: 900px) {
-  .orbit__annotation,
-  .orbit__ring--inner,
-  .orbit__sat--inner {
+  .orbit__ring--c,
+  .orbit__sat--c {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .orbit__arc,
-  .orbit__sat {
+  .orbit__sat--a,
+  .orbit__sat--b,
+  .orbit__sat--c {
     animation: none;
   }
 }

@@ -1,8 +1,7 @@
 import { PageHeader } from '../components/PageHeader'
-import { SectionHead } from '../components/SectionHead'
 import { CtaLink } from '../components/CtaLink'
 import { ContactForm } from '../components/ContactForm'
-import { EMAIL } from '../content/site'
+import { EMAIL, WHATSAPP_URL } from '../content/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 import './Contato.css'
 
@@ -11,8 +10,6 @@ const EXPECTATIONS = [
   'A gente entende como o processo funciona antes de sugerir qualquer coisa.',
   'Se existir um caminho mais simples que um sistema, é ele que vamos apontar.',
 ]
-
-const WHATSAPP_URL = 'https://wa.me/5545988213870'
 
 export default function Contato() {
   usePageMeta(
@@ -23,8 +20,6 @@ export default function Contato() {
   return (
     <>
       <PageHeader
-        index="01"
-        label="Contato"
         title={
           <>
             Qual parte do seu dia
@@ -37,12 +32,6 @@ export default function Contato() {
 
       <section className="contato section">
         <div className="wrap">
-          <div className="contato__head grid">
-            <div className="contato__meta">
-              <SectionHead index="02" label="O que esperar" />
-            </div>
-          </div>
-
           <ol className="contato__list">
             {EXPECTATIONS.map((item, i) => (
               <li className="contato__item" key={item}>
@@ -98,9 +87,7 @@ export default function Contato() {
       <section className="contato-form section" id="formulario">
         <div className="wrap grid">
           <div className="contato-form__aside">
-            <SectionHead index="03" label="Conte o que trava" />
-
-            <h2 className="contato-form__title" data-reveal="" style={{ transitionDelay: '60ms' }}>
+            <h2 className="contato-form__title" data-reveal="" style={{ transitionDelay: '0ms' }}>
               Comece pelo que está travando.
             </h2>
 

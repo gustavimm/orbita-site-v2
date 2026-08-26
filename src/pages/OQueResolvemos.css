@@ -1,7 +1,6 @@
 /* ==========================================================================
    O que resolvemos — página de diagnóstico.
-   Sem cards: índice na margem, título forte, sinais à esquerda e a resposta
-   à direita. Tudo separado apenas por hairlines.
+   Título forte, sinais à esquerda e a resposta à direita.
    ========================================================================== */
 
 /* --- Abertura ----------------------------------------------------------------
@@ -25,10 +24,6 @@
   border-top: var(--hairline) solid var(--c-line);
 }
 
-.resolve__head {
-  margin-bottom: clamp(var(--sp-8), 8vw, var(--sp-10));
-}
-
 /* --- Item --------------------------------------------------------------------
    Cada situação é um card fechado: fundo elevado, borda sutil, bastante ar
    entre um e outro — para deixar claro onde uma ideia termina e a próxima
@@ -46,10 +41,6 @@
   background: var(--c-surface);
   border: var(--hairline) solid var(--c-line);
   border-radius: var(--r-xs);
-}
-
-.resolve__eyebrow {
-  margin-bottom: var(--sp-5);
 }
 
 .resolve__title {
@@ -211,17 +202,13 @@
 }
 
 /* ==========================================================================
-   Mobile — o índice sai da margem e vira uma linha própria acima do título.
+   Mobile
    ========================================================================== */
 
 @media (max-width: 640px) {
   .pagehead--resolve .pagehead__lead {
     grid-column: 1 / -1;
     max-width: 38ch;
-  }
-
-  .resolve__head {
-    margin-bottom: var(--sp-8);
   }
 
   .resolve__card {

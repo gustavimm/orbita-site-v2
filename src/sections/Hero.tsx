@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { OrbitSystem } from '../components/OrbitSystem'
-import { SectionHead } from '../components/SectionHead'
 import { CTA_LABEL, CTA_TO } from '../content/site'
 import './Hero.css'
 
@@ -16,12 +15,7 @@ export function Hero() {
     <section className="hero" id="top">
       <div className="hero__inner wrap grid">
         <div className="hero__content">
-          <SectionHead
-            index="01"
-            label="Software house para micro e pequenas empresas"
-          />
-
-          <h1 className="hero__title" data-reveal="" style={{ transitionDelay: '80ms' }}>
+          <h1 className="hero__title" data-reveal="" style={{ transitionDelay: '0ms' }}>
             Seu negócio
             <br />
             no centro<span className="hero__title-dot">.</span>

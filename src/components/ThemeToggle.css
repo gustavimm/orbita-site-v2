@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Switch de tema — trilho + nó deslizante. A fase do nó (lua recortada
+   ou sol cheio) vem de um box-shadow inset, não de dois ícones.
+   ========================================================================== */
+
+.theme-switch {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: 44px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.theme-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch__track {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--c-surface);
+  border: var(--hairline) solid var(--c-line-strong);
+  transition:
+    background-color var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease);
+}
+
+.theme-switch__track::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  /* Fase de lua: um "bocado" do tom do próprio trilho recorta o círculo. */
+  box-shadow: inset -11px -5px 0 0 var(--c-surface);
+  transform: translateY(-50%);
+  transition:
+    transform var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease),
+    background-color var(--t-base) var(--ease);
+}
+
+/* Claro: o nó desliza para a direita e vira um círculo cheio — sol. */
+.theme-switch input:checked + .theme-switch__track {
+  background: var(--c-bg-deep);
+}
+
+.theme-switch input:checked + .theme-switch__track::before {
+  transform: translate(20px, -50%);
+  box-shadow: inset 0 0 0 0 var(--c-surface);
+}
+
+.theme-switch input:focus-visible + .theme-switch__track {
+  outline: 1px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .theme-switch:hover .theme-switch__track {
+    border-color: var(--c-accent-line);
+  }
+}
+
+@media (max-width: 900px) {
+  .theme-switch {
+    width: 48px;
+    height: 26px;
+  }
+
+  .theme-switch__track::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  .theme-switch input:checked + .theme-switch__track::before {
+    transform: translate(22px, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch__track,
+  .theme-switch__track::before {
+    transition: none;
+  }
+}

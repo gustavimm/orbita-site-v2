@@ -1,24 +1,12 @@
-import { SectionHead } from '../components/SectionHead'
 import { STEPS } from '../content/site'
 import './Processo.css'
 
-type ProcessoProps = {
-  index?: string
-  label?: string
-}
-
-export function Processo({ index, label = 'Como trabalhamos' }: ProcessoProps) {
+export function Processo() {
   return (
     <section className="processo section" id="como-trabalhamos">
       <div className="wrap">
         <div className="processo__head grid">
-          {index ? (
-            <div className="processo__meta">
-              <SectionHead index={index} label={label} />
-            </div>
-          ) : null}
-
-          <h2 className="processo__statement" data-reveal="" style={{ transitionDelay: '80ms' }}>
+          <h2 className="processo__statement" data-reveal="" style={{ transitionDelay: '0ms' }}>
             Um caminho curto entre entender o problema e ter algo funcionando.
           </h2>
         </div>
@@ -44,15 +32,9 @@ export function Processo({ index, label = 'Como trabalhamos' }: ProcessoProps) {
         </div>
 
         <ol className="processo__detail">
-          {STEPS.map((step, i) => (
+          {STEPS.map((step) => (
             <li className="processo__detail-item" key={step.title}>
               <div className="processo__detail-card" data-reveal="">
-                <p className="eyebrow processo__detail-eyebrow">
-                  <span className="index">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="eyebrow__rule" aria-hidden="true" />
-                  <span className="label">Etapa</span>
-                </p>
-
                 <h3 className="processo__detail-title">{step.title}</h3>
                 <p className="processo__question">{step.question}</p>
                 <p className="processo__detail-text">{step.detail}</p>

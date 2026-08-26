@@ -17,12 +17,8 @@
   margin-bottom: clamp(var(--sp-9), 10vw, var(--sp-11));
 }
 
-.processo__meta {
-  grid-column: 1 / span 3;
-}
-
 .processo__statement {
-  grid-column: 5 / span 8;
+  grid-column: 1 / span 8;
   max-width: 24ch;
   font-size: var(--fs-h2);
   font-weight: var(--fw-regular);
@@ -124,7 +120,7 @@
 
 @media (max-width: 1080px) {
   .processo__statement {
-    grid-column: 4 / span 9;
+    grid-column: 1 / span 9;
   }
 }
 
@@ -133,10 +129,6 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .processo__meta {
-    grid-column: 1 / -1;
-  }
-
   .processo__statement {
     grid-column: 1 / -1;
     max-width: 20ch;
@@ -224,10 +216,6 @@
   background: var(--c-surface);
   border: var(--hairline) solid var(--c-line);
   border-radius: var(--r-xs);
-}
-
-.processo__detail-eyebrow {
-  margin-bottom: var(--sp-5);
 }
 
 .processo__detail-title {

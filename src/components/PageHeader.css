@@ -3,16 +3,12 @@
    ========================================================================== */
 
 .pagehead {
-  padding-top: clamp(136px, 19vh, 216px);
+  padding-top: clamp(168px, 23vh, 248px);
   padding-bottom: clamp(var(--sp-9), 11vh, var(--sp-11));
 }
 
 .pagehead > .wrap {
   row-gap: clamp(var(--sp-7), 6vw, var(--sp-8));
-}
-
-.pagehead__meta {
-  grid-column: 1 / span 3;
 }
 
 .pagehead__title {
@@ -47,7 +43,6 @@
 }
 
 @media (max-width: 900px) {
-  .pagehead__meta,
   .pagehead__title {
     grid-column: 1 / -1;
   }
@@ -59,7 +54,7 @@
 
 @media (max-width: 640px) {
   .pagehead {
-    padding-top: 124px;
+    padding-top: 144px;
     padding-bottom: var(--sp-9);
   }
 

@@ -5,14 +5,11 @@
 
 .contatocta {
   border-top: var(--hairline) solid var(--c-line);
+  padding-top: clamp(var(--sp-9), 9vh, var(--sp-11));
 }
 
 .contatocta > .wrap {
   row-gap: clamp(var(--sp-8), 8vw, var(--sp-10));
-}
-
-.contatocta__meta {
-  grid-column: 1 / span 3;
 }
 
 .contatocta__question {
@@ -50,7 +47,6 @@
 }
 
 @media (max-width: 900px) {
-  .contatocta__meta,
   .contatocta__question,
   .contatocta__action {
     grid-column: 1 / -1;

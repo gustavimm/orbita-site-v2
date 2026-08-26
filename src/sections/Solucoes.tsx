@@ -1,33 +1,21 @@
-import { SectionHead } from '../components/SectionHead'
 import { CtaLink } from '../components/CtaLink'
 import { SOLUTIONS } from '../content/site'
 import './Solucoes.css'
-
-type SolucoesProps = {
-  index?: string
-  label?: string
-}
 
 /**
  * Teaser da home: título + um resumo de uma linha por frente de trabalho.
  * O detalhamento de cada uma mora em "Como trabalhamos".
  */
-export function Solucoes({ index, label = 'Soluções' }: SolucoesProps) {
+export function Solucoes() {
   return (
     <section className="solucoes section" id="solucoes">
       <div className="wrap">
-        {index ? (
-          <div className="solucoes__head grid">
-            <div className="solucoes__meta">
-              <SectionHead index={index} label={label} />
-            </div>
-
-            <h2 className="solucoes__lead" data-reveal="" style={{ transitionDelay: '80ms' }}>
-              Quatro frentes de trabalho. O que entra em cada projeto vem do
-              diagnóstico, não do catálogo.
-            </h2>
-          </div>
-        ) : null}
+        <div className="solucoes__head grid">
+          <h2 className="solucoes__lead" data-reveal="" style={{ transitionDelay: '0ms' }}>
+            Quatro frentes de trabalho. O que entra em cada projeto vem do
+            diagnóstico, não do catálogo.
+          </h2>
+        </div>
 
         <ul className="solucoes__teaser" data-reveal="" style={{ transitionDelay: '160ms' }}>
           {SOLUTIONS.map((item) => (

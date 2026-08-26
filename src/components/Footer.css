@@ -51,35 +51,77 @@
   border-radius: var(--r-xs);
 }
 
-.footer__meta {
+/* --- Ícones de contato -------------------------------------------------------
+   Chip com tooltip que sobe no hover. O "bounce" é a única exceção à curva de
+   easing padrão do site — efeito de interface, contido a este grupo.
+   ---------------------------------------------------------------------------- */
+
+.footer__icons {
   grid-column: 5 / span 5;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--sp-3) var(--sp-6);
+  justify-self: center;
+  display: inline-flex;
+  gap: var(--sp-3);
 }
 
-.footer__social,
-.footer__domain {
-  font-size: var(--fs-label);
-  font-weight: var(--fw-medium);
-  line-height: 1;
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
+.footer__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  background: var(--c-surface);
+  border: var(--hairline) solid var(--c-line-strong);
+  border-radius: var(--r-xs);
   color: var(--c-text-dim);
-}
-
-.footer__social {
-  box-shadow: inset 0 -1px 0 0 transparent;
   transition:
-    color var(--t-fast) var(--ease),
-    box-shadow var(--t-fast) var(--ease);
+    color 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+    border-color 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+    transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.footer__social:hover,
-.footer__social:focus-visible {
-  color: var(--c-accent);
-  box-shadow: inset 0 -1px 0 0 var(--c-accent);
+.footer__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.footer__icon:hover,
+.footer__icon:focus-visible {
+  color: var(--brand);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
+.footer__icon-tip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding: 4px 8px;
+  background: var(--c-bg-deep);
+  border-radius: var(--r-xs);
+  color: var(--c-text);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.footer__icon-tip::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--c-bg-deep);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.footer__icon:hover .footer__icon-tip,
+.footer__icon:focus-visible .footer__icon-tip {
+  top: -54px;
+  opacity: 1;
 }
 
 .footer__copy {
@@ -100,7 +142,7 @@
     grid-column: 1 / span 6;
   }
 
-  .footer__meta {
+  .footer__icons {
     grid-column: 5 / span 4;
   }
 
@@ -125,7 +167,7 @@
   }
 
   .footer__brand,
-  .footer__meta,
+  .footer__icons,
   .footer__copy {
     grid-column: 1 / -1;
     justify-self: start;

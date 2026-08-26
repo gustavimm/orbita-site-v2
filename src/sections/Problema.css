@@ -13,12 +13,8 @@
   row-gap: clamp(var(--sp-7), 7vw, var(--sp-9));
 }
 
-.problema__meta {
-  grid-column: 1 / span 3;
-}
-
 .problema__statement {
-  grid-column: 4 / span 9;
+  grid-column: 1 / span 9;
   font-size: var(--fs-h2);
   font-weight: var(--fw-regular);
   line-height: 1.08;
@@ -48,7 +44,7 @@
 
 @media (max-width: 1080px) {
   .problema__statement {
-    grid-column: 3 / span 10;
+    grid-column: 1 / span 10;
     max-width: 24ch;
   }
 
@@ -58,10 +54,6 @@
 }
 
 @media (max-width: 900px) {
-  .problema__meta {
-    grid-column: 1 / -1;
-  }
-
   .problema__statement {
     grid-column: 1 / -1;
     max-width: 20ch;

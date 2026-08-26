@@ -1,9 +1,42 @@
 import './OrbitSystem.css'
 
+const CENTER = 240
+
+function pointOnCircle(radius: number, angleDeg: number) {
+  const rad = (angleDeg * Math.PI) / 180
+  return {
+    x: CENTER + radius * Math.cos(rad),
+    y: CENTER + radius * Math.sin(rad),
+  }
+}
+
+type OrbitConfig = {
+  key: 'a' | 'b' | 'c'
+  rx: number
+  ry: number
+  tilt: number
+  angle: number
+  period: number
+  reverse: boolean
+  dotRadius: number
+}
+
+const ORBITS: OrbitConfig[] = [
+  { key: 'a', rx: 216, ry: 150, tilt: -18, angle: -40, period: 96, reverse: false, dotRadius: 4.6 },
+  { key: 'b', rx: 180, ry: 132, tilt: 22, angle: 150, period: 64, reverse: true, dotRadius: 4 },
+  { key: 'c', rx: 128, ry: 76, tilt: -11, angle: 250, period: 44, reverse: false, dotRadius: 3.4 },
+]
+
+const TRAILS = [
+  { offset: 9, radius: 1.4, opacity: 0.16 },
+  { offset: 18, radius: 2.2, opacity: 0.3 },
+  { offset: 29, radius: 3.2, opacity: 0.48 },
+]
+
 /**
- * Sistema orbital do hero.
- * Anéis finos, marcas técnicas e um ponto central verde: o negócio no centro,
- * a tecnologia operando ao redor. Decorativo — a mensagem está no título.
+ * Sistema orbital do hero: elipses inclinadas em ângulos distintos, cada uma
+ * com um satélite em velocidade própria. O negócio é o núcleo; a tecnologia
+ * orbita ao redor — sem miras, sem linhas de anotação.
  */
 export function OrbitSystem() {
   return (
@@ -14,50 +47,46 @@ export function OrbitSystem() {
       aria-hidden="true"
       focusable="false"
     >
-      {/* Anéis */}
-      <circle className="orbit__ring" cx="240" cy="240" r="196" />
-      <circle className="orbit__ring orbit__ring--mid" cx="240" cy="240" r="134" />
-      <circle className="orbit__ring orbit__ring--inner" cx="240" cy="240" r="72" />
+      {ORBITS.map((orbit) => {
+        const sign = orbit.reverse ? 1 : -1
+        const dot = pointOnCircle(orbit.rx, orbit.angle)
 
-      {/* Marcas técnicas nos pontos cardeais do anel externo */}
-      <g className="orbit__ticks">
-        <path d="M240 30v16" />
-        <path d="M240 434v16" />
-        <path d="M30 240h16" />
-        <path d="M434 240h16" />
-      </g>
+        return (
+          <g key={orbit.key} transform={`rotate(${orbit.tilt} ${CENTER} ${CENTER})`}>
+            <g
+              transform={`translate(${CENTER} ${CENTER}) scale(1 ${(orbit.ry / orbit.rx).toFixed(4)}) translate(${-CENTER} ${-CENTER})`}
+            >
+              <circle
+                className={`orbit__ring orbit__ring--${orbit.key}`}
+                cx={CENTER}
+                cy={CENTER}
+                r={orbit.rx}
+              />
 
-      {/* Arco de destaque percorrendo a trajetória intermediária */}
-      <circle
-        className="orbit__arc"
-        cx="240"
-        cy="240"
-        r="134"
-        strokeDasharray="132 710"
-        strokeLinecap="round"
-      />
+              <g className={`orbit__sat orbit__sat--${orbit.key}`}>
+                {TRAILS.map((trail) => {
+                  const p = pointOnCircle(orbit.rx, orbit.angle + sign * trail.offset)
+                  return (
+                    <circle
+                      key={trail.offset}
+                      className="orbit__sat-trail"
+                      cx={p.x}
+                      cy={p.y}
+                      r={trail.radius}
+                      opacity={trail.opacity}
+                    />
+                  )
+                })}
+                <circle className="orbit__sat-dot" cx={dot.x} cy={dot.y} r={orbit.dotRadius} />
+              </g>
+            </g>
+          </g>
+        )
+      })}
 
-      {/* Corpos em órbita */}
-      <g className="orbit__sat orbit__sat--outer">
-        <circle cx="240" cy="44" r="3" />
-      </g>
-      <g className="orbit__sat orbit__sat--mid">
-        <circle className="orbit__sat-dot" cx="374" cy="240" r="4" />
-      </g>
-      <g className="orbit__sat orbit__sat--inner">
-        <circle cx="168" cy="240" r="2.5" />
-      </g>
-
-      {/* Centro: o negócio */}
-      <circle className="orbit__core-halo" cx="240" cy="240" r="14" />
-      <circle className="orbit__core" cx="240" cy="240" r="5" />
-
-      {/* Anotação técnica — ocultada no mobile */}
-      <g className="orbit__annotation">
-        <path d="M249 231l84-84h58" />
-        <circle cx="391" cy="147" r="1.6" />
-        <text x="333" y="138">SEU NEGÓCIO</text>
-      </g>
+      {/* Núcleo: o negócio */}
+      <circle className="orbit__core-halo" cx={CENTER} cy={CENTER} r="19" />
+      <circle className="orbit__core" cx={CENTER} cy={CENTER} r="7.5" />
     </svg>
   )
 }

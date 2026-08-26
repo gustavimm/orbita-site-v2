@@ -23,13 +23,12 @@
 .hero__orbit {
   grid-column: 8 / span 5;
   justify-self: center;
-  width: min(100%, 460px);
+  width: min(100%, 580px);
 }
 
 /* --- Título ---------------------------------------------------------------- */
 
 .hero__title {
-  margin-top: clamp(var(--sp-6), 4vw, var(--sp-8));
   font-size: var(--fs-display);
   font-weight: var(--fw-bold);
   line-height: var(--lh-display);
@@ -128,8 +127,7 @@
   .hero__orbit {
     grid-column: 3 / span 4;
     justify-self: end;
-    width: min(62vw, 340px);
-    opacity: 0.9;
+    width: min(68vw, 420px);
   }
 
   .hero__rail-item {
@@ -160,7 +158,7 @@
   /* Centralizada e limitada: nada encosta nas bordas dentro do gutter. */
   .hero__orbit {
     justify-self: center;
-    width: min(68vw, 280px);
+    width: min(78vw, 340px);
     max-width: 100%;
   }
 
