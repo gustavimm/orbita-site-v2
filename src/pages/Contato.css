@@ -96,14 +96,27 @@
   box-shadow: inset 0 -1px 0 0 var(--c-accent);
 }
 
-/* O painel: uma superfície elevada sobre o fundo da página.
-   Sem blur, sem sombra, sem cantos arredondados de template. */
+/* O painel: uma superfície elevada sobre o fundo da página. Borda tingida
+   de acento em vez de neutra, e um brilho sutil no hover — mesma ideia do
+   .cta-solid, aplicada a uma superfície em vez de um botão. */
 .contato-form__panel {
   grid-column: 6 / span 7;
   padding: clamp(var(--sp-6), 3.4vw, var(--sp-8));
   background: var(--c-surface);
-  border: var(--hairline) solid var(--c-line-strong);
+  border: var(--hairline) solid var(--c-accent-line);
   border-radius: var(--r-xs);
+  transition: box-shadow var(--t-slow) var(--ease);
+}
+
+@media (hover: hover) {
+  .contato-form__panel:hover {
+    box-shadow: 0 0 32px 2px var(--c-accent-veil);
+  }
+
+  /* O formulário em si recua um pouco — o painel brilha, o conteúdo assenta. */
+  .contato-form__panel:hover .form {
+    transform: scale(0.98);
+  }
 }
 
 /* ==========================================================================

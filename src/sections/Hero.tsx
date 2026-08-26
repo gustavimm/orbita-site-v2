@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { OrbitSystem } from '../components/OrbitSystem'
+import { VideoText } from '../components/VideoText'
 import { CTA_LABEL, CTA_TO } from '../content/site'
 import './Hero.css'
 
@@ -16,7 +17,18 @@ export function Hero() {
       <div className="hero__inner wrap grid">
         <div className="hero__content">
           <h1 className="hero__title" data-reveal="" style={{ transitionDelay: '0ms' }}>
-            Seu negócio
+            Seu{' '}
+            <VideoText
+              src="/videos/orbita-videotext-v2-boomerang.webm"
+              fallbackSrc="/videos/orbita-videotext-v2-boomerang.mp4"
+              autoPlay
+              muted
+              loop
+              fontSize="var(--fs-display)"
+              fontWeight="var(--fw-bold)"
+            >
+              negócio
+            </VideoText>
             <br />
             no centro<span className="hero__title-dot">.</span>
           </h1>

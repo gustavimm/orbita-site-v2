@@ -224,3 +224,51 @@
 .cta-solid:focus-visible .cta-solid__arrow {
   transform: translateX(6px);
 }
+
+/* --- CTA contorno -----------------------------------------------------------
+   Mesma forma do sólido, mas parte vazada: para ações que já estão dentro de
+   um fluxo iniciado pela pessoa (enviar um formulário), não a chamada
+   principal da página. Preenche ao passar o mouse — o inverso do sólido.
+   ------------------------------------------------------------------------- */
+
+.cta-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-6);
+  border: var(--hairline) solid var(--c-accent);
+  border-radius: var(--r-xs);
+  background: transparent;
+  color: var(--c-accent);
+  font-family: var(--f-display);
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  transition:
+    background-color var(--t-base) var(--ease),
+    color var(--t-base) var(--ease);
+}
+
+.cta-outline:hover,
+.cta-outline:focus-visible {
+  background: var(--c-accent);
+  color: var(--c-bg-deep);
+}
+
+.cta-outline:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .cta-outline {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.cta-outline:hover .cta-solid__arrow,
+.cta-outline:focus-visible .cta-solid__arrow {
+  transform: translateX(6px);
+}

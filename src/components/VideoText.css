@@ -1,0 +1,35 @@
+/* ==========================================================================
+   VideoText — vídeo recortado na forma do texto via máscara SVG.
+   Usado na palavra "negócio" do H1 do Hero.
+   ========================================================================== */
+
+.video-text {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.video-text__visual {
+  position: relative;
+  display: inline-block;
+}
+
+/* Cor sólida --c-accent: base visível enquanto o vídeo carrega e fallback
+   se ele falhar — o vídeo, quando pronto, cobre por cima. */
+.video-text__fallback {
+  color: var(--c-accent);
+}
+
+.video-text__svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.video-text__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

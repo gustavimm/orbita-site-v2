@@ -208,7 +208,7 @@ export function ContactForm() {
         </div>
 
         <div className="form__action">
-          <button className="cta-solid" type="submit" disabled={sending}>
+          <button className="cta-outline" type="submit" disabled={sending}>
             {sending ? 'Enviando…' : 'Enviar'}
             <span className="cta-solid__arrow" aria-hidden="true">
               →
