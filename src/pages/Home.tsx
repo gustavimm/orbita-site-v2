@@ -1,12 +1,10 @@
 import { Hero } from '../sections/Hero'
 import { Problema } from '../sections/Problema'
 import { Solucoes } from '../sections/Solucoes'
-import { ContatoCta } from '../sections/ContatoCta'
 import { usePageMeta } from '../hooks/usePageMeta'
 
 /**
- * Fluxo da home: Hero → Problema → Soluções → CTA final.
- * O visitante precisa entender a dor antes de sair da primeira página.
+ * Fluxo da home: Hero → Problema → Soluções (teaser). O Footer já traz a chamada de contato.
  */
 export default function Home() {
   usePageMeta(
@@ -19,7 +17,6 @@ export default function Home() {
       <Hero />
       <Problema index="02" />
       <Solucoes index="03" />
-      <ContatoCta index="04" />
     </>
   )
 }
