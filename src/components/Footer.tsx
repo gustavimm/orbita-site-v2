@@ -1,7 +1,6 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { Logo } from './Logo'
-import { CtaLink } from './CtaLink'
 import { EMAIL, INSTAGRAM_URL, WHATSAPP_URL } from '../content/site'
 import './Footer.css'
 
@@ -47,30 +46,14 @@ const CHANNELS = [
 ]
 
 /**
- * O rodapé é uma chamada para o contato, não um segundo menu.
- * A navegação já existe na navbar — repeti-la aqui só adiciona ruído.
+ * O rodapé é só identidade e contato — institucional, sem call-to-action.
+ * O "Agendar diagnóstico" já fica fixo na navbar em toda página; repeti-lo
+ * aqui embaixo seria o mesmo botão duas vezes na mesma tela.
  */
 export function Footer() {
   return (
     <footer className="footer">
       <div className="wrap">
-        <div className="footer__call grid">
-          <h2 className="footer__headline" data-reveal="">
-            Tem algo travando
-            <br />o seu negócio<span className="footer__mark">?</span>
-          </h2>
-
-          <div
-            className="footer__action"
-            data-reveal=""
-            style={{ transitionDelay: '80ms' }}
-          >
-            <CtaLink className="footer__cta" to="/contato">
-              Falar com a Órbita
-            </CtaLink>
-          </div>
-        </div>
-
         <div className="footer__bottom grid">
           <Link className="footer__brand" to="/" aria-label="Órbita — página inicial">
             <Logo />

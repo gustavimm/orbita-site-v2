@@ -1,5 +1,4 @@
 import { PageHeader } from '../components/PageHeader'
-import { ContatoCta } from '../sections/ContatoCta'
 import { usePageMeta } from '../hooks/usePageMeta'
 import './Sobre.css'
 
@@ -55,8 +54,6 @@ export default function Sobre() {
           </ol>
         </div>
       </section>
-
-      <ContatoCta />
     </>
   )
 }
