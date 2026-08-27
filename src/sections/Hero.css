@@ -23,10 +23,15 @@
 }
 
 /* Textura ambiente — dois brilhos radiais bem diluídos (verde-ciano da
-   marca + azul) que derivam devagar por trás do hero inteiro. A camada
-   menos protagonista das três: não deve ser identificável como "gradiente"
-   num frame parado, só a deriva ao longo do tempo entrega o efeito. Atrás
-   de tudo (z-index -1 numa stacking context isolada em .hero acima). */
+   marca + azul) que derivam por trás do hero inteiro. A camada menos
+   protagonista das três em intensidade de cor, mas o movimento em si
+   precisa ser percebido em poucos segundos de olhar a página — duas
+   animações em durações diferentes e sem relação simples entre si (16s e
+   23s: não sincronizam de forma óbvia) combinam deriva de posição com uma
+   leve "respiração" de escala/ângulo, pra não ler como um pêndulo mecânico
+   de ida e volta. Atrás de tudo (z-index -1 numa stacking context isolada
+   em .hero acima). Cor/opacidade inalteradas — só velocidade e riqueza de
+   movimento mudaram aqui. */
 .hero__ambient {
   position: absolute;
   inset: 0;
@@ -37,7 +42,15 @@
     radial-gradient(circle at 78% 68%, rgba(47, 107, 255, 0.08), transparent 58%);
   background-size: 160% 160%;
   background-repeat: no-repeat;
-  animation: hero-ambient-drift 46s ease-in-out infinite alternate;
+  /* Mesmos valores do keyframe 0%/100% de cada animação abaixo: com
+     prefers-reduced-motion a animação some e este já é o frame parado
+     "certo", não um valor arbitrário. */
+  background-position: 0% 10%, 100% 90%;
+  transform-origin: 50% 50%;
+  transform: scale(1) rotate(0deg);
+  animation:
+    hero-ambient-pan 16s linear infinite,
+    hero-ambient-breathe 23s ease-in-out infinite;
 }
 
 :root[data-theme='light'] .hero__ambient {
@@ -49,12 +62,35 @@
     radial-gradient(circle at 78% 68%, rgba(47, 107, 255, 0.05), transparent 58%);
 }
 
-@keyframes hero-ambient-drift {
-  from {
+/* Início e fim idênticos: o loop reinicia sem salto visível, mesmo em
+   "linear" (sem alternate/reverse pra não ler como pêndulo que para nas
+   pontas). Waypoints intermediários fora de uma linha reta simples pra
+   não parecer um vaivém mecânico. */
+@keyframes hero-ambient-pan {
+  0% {
     background-position: 0% 10%, 100% 90%;
   }
-  to {
-    background-position: 30% 55%, 65% 35%;
+  25% {
+    background-position: 24% 46%, 76% 54%;
+  }
+  50% {
+    background-position: 46% 12%, 54% 88%;
+  }
+  75% {
+    background-position: 16% 50%, 84% 50%;
+  }
+  100% {
+    background-position: 0% 10%, 100% 90%;
+  }
+}
+
+@keyframes hero-ambient-breathe {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(1.4deg);
   }
 }
 
