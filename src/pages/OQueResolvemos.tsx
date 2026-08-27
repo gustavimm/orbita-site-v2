@@ -1,47 +1,21 @@
+import { CircleCheck, Scale, Target } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
 import { CTA_LABEL, CTA_TO, PROBLEMS } from '../content/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 import './OQueResolvemos.css'
 
-/* Ícones de linha fina — mesmo vocabulário do Hero e de "Como trabalhamos". */
-
-function IconFocus() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="5" />
-      <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3" />
-    </svg>
-  )
-}
-
-function IconScale() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 4v16" />
-      <path d="M6 8h12" />
-      <path d="M9 20h6" />
-      <path d="M6 8v5" />
-      <path d="M18 8v5" />
-      <circle cx="6" cy="15" r="1.6" />
-      <circle cx="18" cy="15" r="1.6" />
-    </svg>
-  )
-}
-
-function IconCheckRing() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="7.5" />
-      <path d="m8.5 12.5 2.4 2.4L15.8 9.6" />
-    </svg>
-  )
-}
-
+/* Ícones da trilha de decisão via lucide-react — depois de duas tentativas
+   de desenhar à mão (a da balança em particular saía torta), trocamos por
+   uma lib testada em vez de arriscar geometria mal fechada de novo.
+   strokeWidth 1.4 pra bater com o peso de traço do resto do vocabulário
+   visual do site (Hero, Processo.tsx); size/cor controlados via CSS
+   (.resolve-cta__step-icon svg e a troca de color por posição), igual já
+   funcionava com os ícones desenhados à mão. */
 const DECISION_STEPS = [
-  { label: 'Entender', Icon: IconFocus },
-  { label: 'Avaliar', Icon: IconScale },
-  { label: 'Decidir', Icon: IconCheckRing },
+  { label: 'Entender', Icon: Target },
+  { label: 'Avaliar', Icon: Scale },
+  { label: 'Decidir', Icon: CircleCheck },
 ]
 
 export default function OQueResolvemos() {
@@ -152,7 +126,7 @@ export default function OQueResolvemos() {
               {DECISION_STEPS.map(({ label, Icon }) => (
                 <li className="resolve-cta__step" key={label}>
                   <span className="resolve-cta__step-icon" aria-hidden="true">
-                    <Icon />
+                    <Icon size={18} strokeWidth={1.4} />
                   </span>
                   <span className="resolve-cta__step-label">{label}</span>
                 </li>
