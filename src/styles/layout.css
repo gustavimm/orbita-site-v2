@@ -283,6 +283,9 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   padding: clamp(var(--sp-7), 5vw, var(--sp-8)) clamp(var(--sp-6), 4vw, var(--sp-8));
   background: var(--c-surface);
   border-radius: var(--r-xs);
@@ -329,6 +332,7 @@
 .card__body {
   position: relative;
   z-index: 5;
+  flex: 1 1 auto;
   color: var(--c-text-dim);
   font-family: var(--f-body);
   transition: transform var(--t-base) var(--ease);

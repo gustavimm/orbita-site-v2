@@ -32,6 +32,7 @@
 .resolve__list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   column-gap: var(--grid-gap);
   row-gap: clamp(var(--sp-6), 4vw, var(--sp-7));
 }
