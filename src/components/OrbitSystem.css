@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Sistema orbital — elipses inclinadas, traços de 1px, movimento longo.
+   Elemento lateral fixo do Hero (ver Hero.css .hero__orbit): presença
+   discreta e constante ao lado do texto, não fundo atrás dele — isso já
+   foi tentado (cobrindo o hero inteiro) e descartado por competir demais
+   com a leitura.
+   ========================================================================== */
+
+.orbit {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Cor sólida (não hairline translúcida) — a órbita é o símbolo da marca,
+   precisa se impor à primeira vista nos dois temas, não só sugerir um traço. */
+.orbit__ring {
+  fill: none;
+  stroke: var(--c-text-dim);
+  vector-effect: non-scaling-stroke;
+}
+
+.orbit__ring--a {
+  stroke-width: 5;
+}
+
+.orbit__ring--b {
+  stroke-width: 4.2;
+}
+
+.orbit__ring--c {
+  stroke-width: 1.6;
+}
+
+.orbit__sat {
+  transform-box: view-box;
+  transform-origin: 240px 240px;
+}
+
+/* Bem mais lento que o giro "de vitrine" que fazia sentido como peça
+   lateral: atrás do texto do H1, o movimento precisa ler como ambiente,
+   nunca competir com a leitura. */
+.orbit__sat--a {
+  animation: orbit-spin 260s linear infinite;
+}
+
+.orbit__sat--b {
+  animation: orbit-spin 190s linear infinite reverse;
+}
+
+.orbit__sat--c {
+  animation: orbit-spin 130s linear infinite;
+}
+
+.orbit__sat-trail {
+  fill: var(--c-accent);
+}
+
+.orbit__sat-dot {
+  fill: var(--c-accent);
+}
+
+.orbit__core {
+  fill: var(--c-accent);
+}
+
+.orbit__core-halo {
+  fill: none;
+  stroke: var(--c-accent);
+  stroke-width: 1.5;
+  opacity: 0.35;
+  vector-effect: non-scaling-stroke;
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile: menos camadas, mesma ideia. */
+@media (max-width: 900px) {
+  .orbit__ring--c,
+  .orbit__sat--c {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit__sat--a,
+  .orbit__sat--b,
+  .orbit__sat--c {
+    animation: none;
+  }
+}

@@ -1,13 +1,67 @@
 /* ==========================================================================
-   Hero — primeira dobra. Muito espaço vazio, conteúdo em 6 colunas.
+   Hero — primeira dobra. Muito espaço vazio, composição 6 · 1 · 5.
+
+   Três camadas de movimento sutil, em ordem de protagonismo — cuidado pra
+   nunca deixar mais de uma "gritar" ao mesmo tempo:
+   1. Entrada do H1 ([data-reveal], useReveal) — mais perceptível, só uma vez.
+   2. .hero__orbit — presença lateral constante, discreta.
+   3. .hero__ambient — textura de fundo, a mais sutil, quase imperceptível
+      num frame parado.
    ========================================================================== */
 
 .hero {
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   min-height: 100svh;
   padding-top: clamp(128px, 17vh, 200px);
   padding-bottom: var(--sp-7);
+  /* Salvaguarda: nenhuma das camadas decorativas (.hero__ambient,
+     .hero__orbit) deve abrir rolagem horizontal em telas estreitas. */
+  overflow-x: hidden;
+}
+
+/* Textura ambiente — dois brilhos radiais bem diluídos (verde-ciano da
+   marca + azul) que derivam devagar por trás do hero inteiro. A camada
+   menos protagonista das três: não deve ser identificável como "gradiente"
+   num frame parado, só a deriva ao longo do tempo entrega o efeito. Atrás
+   de tudo (z-index -1 numa stacking context isolada em .hero acima). */
+.hero__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 22% 28%, rgba(0, 230, 168, 0.09), transparent 55%),
+    radial-gradient(circle at 78% 68%, rgba(47, 107, 255, 0.08), transparent 58%);
+  background-size: 160% 160%;
+  background-repeat: no-repeat;
+  animation: hero-ambient-drift 46s ease-in-out infinite alternate;
+}
+
+:root[data-theme='light'] .hero__ambient {
+  /* Mesma lógica de sempre: cor mais densa (--c-accent do claro) mas
+     alpha mais baixo — fundo claro deixa manchas de cor muito mais
+     visíveis que o escuro na mesma intensidade. */
+  background-image:
+    radial-gradient(circle at 22% 28%, rgba(0, 128, 90, 0.06), transparent 55%),
+    radial-gradient(circle at 78% 68%, rgba(47, 107, 255, 0.05), transparent 58%);
+}
+
+@keyframes hero-ambient-drift {
+  from {
+    background-position: 0% 10%, 100% 90%;
+  }
+  to {
+    background-position: 30% 55%, 65% 35%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__ambient {
+    animation: none;
+  }
 }
 
 .hero__inner {
@@ -18,6 +72,12 @@
 
 .hero__content {
   grid-column: 1 / span 6;
+}
+
+.hero__orbit {
+  grid-column: 8 / span 5;
+  justify-self: center;
+  width: min(100%, 580px);
 }
 
 /* --- Título ---------------------------------------------------------------- */
@@ -127,6 +187,10 @@
   .hero__content {
     grid-column: 1 / span 7;
   }
+
+  .hero__orbit {
+    grid-column: 9 / span 4;
+  }
 }
 
 @media (max-width: 900px) {
@@ -136,6 +200,12 @@
 
   .hero__content {
     grid-column: 1 / span 6;
+  }
+
+  .hero__orbit {
+    grid-column: 3 / span 4;
+    justify-self: end;
+    width: min(68vw, 420px);
   }
 
   .hero__rail-item {
@@ -158,8 +228,16 @@
     row-gap: var(--sp-8);
   }
 
-  .hero__content {
+  .hero__content,
+  .hero__orbit {
     grid-column: 1 / -1;
+  }
+
+  /* Centralizada e limitada: nada encosta nas bordas dentro do gutter. */
+  .hero__orbit {
+    justify-self: center;
+    width: min(78vw, 340px);
+    max-width: 100%;
   }
 
   .hero__title {

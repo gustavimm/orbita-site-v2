@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { OrbitSystem } from '../components/OrbitSystem'
 import { CTA_LABEL, CTA_TO } from '../content/site'
 import './Hero.css'
 
@@ -56,6 +57,8 @@ const CAPABILITIES = [
 export function Hero() {
   return (
     <section className="hero" id="top">
+      <div className="hero__ambient" aria-hidden="true" />
+
       <div className="hero__inner wrap grid">
         <div className="hero__content">
           <h1 className="hero__title" data-reveal="" style={{ transitionDelay: '0ms' }}>
@@ -77,6 +80,10 @@ export function Hero() {
               </span>
             </Link>
           </div>
+        </div>
+
+        <div className="hero__orbit" data-reveal="" style={{ transitionDelay: '200ms' }}>
+          <OrbitSystem />
         </div>
       </div>
 
