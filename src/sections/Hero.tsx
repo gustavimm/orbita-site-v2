@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { OrbitSystem } from '../components/OrbitSystem'
 import { CTA_LABEL, CTA_TO } from '../content/site'
 import './Hero.css'
 
@@ -59,10 +58,6 @@ export function Hero() {
     <section className="hero" id="top">
       <div className="hero__inner wrap grid">
         <div className="hero__content">
-          <span className="hero__bg-orbit" aria-hidden="true">
-            <OrbitSystem />
-          </span>
-
           <h1 className="hero__title" data-reveal="" style={{ transitionDelay: '0ms' }}>
             Seu negócio
             <br />
