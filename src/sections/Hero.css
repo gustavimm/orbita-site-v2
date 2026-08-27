@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Hero — primeira dobra. Muito espaço vazio, composição 6 · 1 · 5.
+   Hero — primeira dobra. Muito espaço vazio, conteúdo em 6 colunas; a
+   órbita não ocupa coluna própria — vive como fundo atrás do H1.
    ========================================================================== */
 
 .hero {
@@ -8,6 +9,11 @@
   min-height: 100svh;
   padding-top: clamp(128px, 17vh, 200px);
   padding-bottom: var(--sp-7);
+  /* Salvaguarda: o anel decorativo atrás do H1 (.hero__title-orbit) se
+     estende além da própria caixa do título de propósito — nunca deve
+     abrir rolagem horizontal por causa disso. */
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .hero__inner {
@@ -20,20 +26,39 @@
   grid-column: 1 / span 6;
 }
 
-.hero__orbit {
-  grid-column: 8 / span 5;
-  justify-self: center;
-  width: min(100%, 580px);
-}
-
 /* --- Título ---------------------------------------------------------------- */
 
 .hero__title {
+  position: relative;
+  isolation: isolate;
   font-size: var(--fs-display);
   font-weight: var(--fw-bold);
   line-height: var(--lh-display);
   letter-spacing: var(--ls-display);
   text-wrap: nowrap;
+}
+
+/* Símbolo da órbita como fundo do H1 inteiro — um anel só, atrás do texto,
+   estendendo-se para a direita (onde antes ficava a versão lateral em
+   coluna própria; as duas nunca coexistem mais). z-index negativo dentro
+   da stacking context isolada do próprio H1 (isolation acima) garante que
+   fica atrás das letras sem depender da ordem de pintura dos irmãos. */
+.hero__title-orbit {
+  position: absolute;
+  top: 50%;
+  left: 58%;
+  width: 3.6em;
+  height: 3.6em;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+:root[data-theme='light'] .hero__title-orbit {
+  /* Traço escuro sobre texto escuro precisa de mais folga que traço claro
+     sobre texto claro — mesmo raciocínio do --c-accent mais denso no claro. */
+  opacity: 0.1;
 }
 
 .hero__title-dot {
@@ -133,10 +158,6 @@
   .hero__content {
     grid-column: 1 / span 7;
   }
-
-  .hero__orbit {
-    grid-column: 9 / span 4;
-  }
 }
 
 @media (max-width: 900px) {
@@ -146,12 +167,6 @@
 
   .hero__content {
     grid-column: 1 / span 6;
-  }
-
-  .hero__orbit {
-    grid-column: 3 / span 4;
-    justify-self: end;
-    width: min(68vw, 420px);
   }
 
   .hero__rail-item {
@@ -174,22 +189,22 @@
     row-gap: var(--sp-8);
   }
 
-  .hero__content,
-  .hero__orbit {
+  .hero__content {
     grid-column: 1 / -1;
-  }
-
-  /* Centralizada e limitada: nada encosta nas bordas dentro do gutter. */
-  .hero__orbit {
-    justify-self: center;
-    width: min(78vw, 340px);
-    max-width: 100%;
   }
 
   .hero__title {
     /* Escala menor e tracking mais aberto para preservar a quebra em duas linhas. */
     font-size: clamp(2.625rem, 12vw, 3.5rem);
     letter-spacing: -0.035em;
+  }
+
+  /* Menos espaço pra sobrar sem invadir a margem — centralizado em vez de
+     puxado pra direita, e um pouco menor em relação ao texto. */
+  .hero__title-orbit {
+    left: 50%;
+    width: 3em;
+    height: 3em;
   }
 
   .hero__lead {
