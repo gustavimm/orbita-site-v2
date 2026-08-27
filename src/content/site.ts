@@ -38,7 +38,7 @@ export const PROBLEMS = [
     build: 'Um fluxo de orçamento com as regras já dentro, sempre no mesmo padrão.',
   },
   {
-    title: 'Planilhas controlando a empresa',
+    title: 'Planilhas fora de controle',
     when: [
       'Só uma pessoa entende a estrutura da planilha',
       'Fórmula quebrada, célula sobrescrita sem aviso',
@@ -56,14 +56,14 @@ export const PROBLEMS = [
     build: 'Um lugar único onde cadastro, histórico e sistemas conversam — o dado é digitado uma vez só.',
   },
   {
-    title: 'Trabalho que devia rodar sozinho',
+    title: 'Trabalho manual repetido',
     when: [
       'A mesma sequência é refeita toda semana, na mão',
       'As mesmas perguntas chegam todo dia, com respostas iguais',
       'Se ninguém lembrar, a tarefa não acontece',
     ],
     build:
-      'Rotinas e respostas automáticas para o previsível, com caminho aberto pra uma pessoa assim que foge do padrão.',
+      'Rotinas e respostas automáticas para o previsível, com abertura pra uma pessoa quando foge do padrão.',
   },
 ]
 
