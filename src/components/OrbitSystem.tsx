@@ -1,4 +1,5 @@
 import { useId, useState } from 'react'
+import { supportsVideoMask } from '../lib/videoMask'
 import './OrbitSystem.css'
 
 const CENTER = 240
@@ -63,11 +64,15 @@ function ringTransforms(orbit: OrbitConfig) {
  * dos dois mascarados com mix-blend-mode (screen no escuro, multiply no
  * claro — ver OrbitSystem.css): garante que a linha nunca fique mais fraca
  * que o --c-text-dim de antes, e é o visual completo se o vídeo falhar ao
- * carregar ou --prefers-reduced-motion pausar.
+ * carregar, --prefers-reduced-motion pausar, ou o motor não compor
+ * mask-image com <video> de forma confiável (ver src/lib/videoMask.ts —
+ * mesmo caso do WebKit já resolvido no VideoText).
  */
 export function OrbitSystem() {
   const maskId = useId()
   const [videoFailed, setVideoFailed] = useState(false)
+  const [videoMaskSupported] = useState(supportsVideoMask)
+  const showVideoMask = videoMaskSupported && !videoFailed
 
   const prefersReducedMotion =
     typeof window !== 'undefined' &&
@@ -81,7 +86,7 @@ export function OrbitSystem() {
       aria-hidden="true"
       focusable="false"
     >
-      {!videoFailed ? (
+      {showVideoMask ? (
         <defs>
           <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="480" height="480">
             <rect width="480" height="480" fill="black" />
@@ -122,7 +127,7 @@ export function OrbitSystem() {
         )
       })}
 
-      {!videoFailed ? (
+      {showVideoMask ? (
         <g className="orbit__video-layer" mask={`url(#${maskId})`}>
           <foreignObject x="0" y="0" width="480" height="480">
             <video

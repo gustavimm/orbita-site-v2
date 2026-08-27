@@ -7,6 +7,22 @@
   position: relative;
   display: inline-block;
   line-height: 1;
+
+  /* Cores do fallback de gradiente (WebKit — ver video-text__gradient e
+     supportsVideoMask). Token local: só esse efeito usa esse azul. */
+  --video-text-grad-from: #1f6feb;
+  --video-text-grad-to: var(--c-accent);
+}
+
+/* WebKit não compõe mask-image com <video> de forma confiável (ver
+   src/lib/videoMask.ts) — em vez de vídeo, texto sólido com um gradiente
+   estático nas mesmas cores. Sem máscara nenhuma: suporte universal. */
+.video-text__gradient {
+  background: linear-gradient(135deg, var(--video-text-grad-from) 0%, var(--video-text-grad-to) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .video-text__visual {

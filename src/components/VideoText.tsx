@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
+import { supportsVideoMask } from '../lib/videoMask'
 import './VideoText.css'
 
 type VideoTextProps = {
@@ -26,6 +27,12 @@ type Measured = {
  * real também serve de base visível (cor sólida --c-accent): mede fonte/
  * peso/caixa para a máscara e funciona como estado de carregamento e
  * fallback de erro, já que o vídeo só cobre por cima quando está pronto.
+ *
+ * Em WebKit (Safari desktop + qualquer navegador em iOS — ver
+ * supportsVideoMask), a composição de máscara com vídeo é instável demais
+ * pra confiar (já tentamos duas vezes). Esses navegadores nem tentam
+ * carregar o vídeo: caem direto num texto sólido com gradiente CSS nas
+ * mesmas cores, sem depender de máscara nenhuma.
  */
 export function VideoText({
   children,
@@ -42,8 +49,10 @@ export function VideoText({
   const baseRef = useRef<HTMLSpanElement>(null)
   const [box, setBox] = useState<Measured | null>(null)
   const [videoFailed, setVideoFailed] = useState(false)
+  const [videoMaskSupported] = useState(supportsVideoMask)
 
   useEffect(() => {
+    if (!videoMaskSupported) return
     const el = baseRef.current
     if (!el) return
 
@@ -69,7 +78,7 @@ export function VideoText({
     const observer = new ResizeObserver(measure)
     observer.observe(el)
     return () => observer.disconnect()
-  }, [children, fontSize, fontWeight])
+  }, [children, fontSize, fontWeight, videoMaskSupported])
 
   // Folga em cima da medida do HTML: o <text> do SVG tende a ser um pouco
   // mais largo que o span, e sem isso a última letra fica cortada na máscara.
@@ -91,7 +100,21 @@ export function VideoText({
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  const showVideo = box && !videoFailed
+  const showVideo = videoMaskSupported && box && !videoFailed
+
+  if (!videoMaskSupported) {
+    return (
+      <span
+        className={`video-text${className ? ` ${className}` : ''}`}
+        style={{ fontSize, fontWeight }}
+        aria-label={children}
+      >
+        <span className="video-text__gradient" aria-hidden="true">
+          {children}
+        </span>
+      </span>
+    )
+  }
 
   return (
     <span
