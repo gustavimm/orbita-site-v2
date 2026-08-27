@@ -322,9 +322,12 @@
   pointer-events: none;
 }
 
+/* Proporção ícone:aro em fração de --node (não px fixo) — cresce junto com
+   o aro ao longo do clamp() dele, em vez de ficar cada vez mais pequeno
+   proporcionalmente conforme o aro cresce em telas largas. */
 .resolve-cta__step-icon svg {
-  width: 16px;
-  height: 16px;
+  width: calc(var(--node) * 0.6);
+  height: calc(var(--node) * 0.6);
   display: block;
   transition: transform var(--t-base) var(--ease), filter var(--t-base) var(--ease);
 }

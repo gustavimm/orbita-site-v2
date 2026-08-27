@@ -18,11 +18,13 @@ function IconFocus() {
 function IconScale() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 4v15" />
+      <path d="M12 4v16" />
       <path d="M6 8h12" />
-      <path d="M9.5 21h5" />
-      <path d="m6 8-2.6 5.4a2.4 2.4 0 0 0 4.6 0Z" />
-      <path d="m18 8 2.6 5.4a2.4 2.4 0 0 1-4.6 0Z" />
+      <path d="M9 20h6" />
+      <path d="M6 8v5" />
+      <path d="M18 8v5" />
+      <circle cx="6" cy="15" r="1.6" />
+      <circle cx="18" cy="15" r="1.6" />
     </svg>
   )
 }
