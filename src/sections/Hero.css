@@ -17,9 +17,17 @@
   min-height: 100svh;
   padding-top: clamp(128px, 17vh, 200px);
   padding-bottom: var(--sp-7);
-  /* Salvaguarda: nenhuma das camadas decorativas (.hero__ambient,
-     .hero__orbit) deve abrir rolagem horizontal em telas estreitas. */
-  overflow-x: hidden;
+  /* As duas dimensões, não só X: overflow-x:hidden sozinho faz o CSS
+     promover overflow-y implicitamente pra "auto" (regra da spec: um eixo
+     non-visible força o outro a sair de "visible"). Isso transformava
+     .hero num contêiner de scroll próprio — o transform:scale() da
+     respiração do .hero__ambient (abaixo) excede a caixa em alguns
+     milímetros durante o pico do ciclo, e como overflow-y virou "auto",
+     esse excesso virava uma barra de rolagem interna que capturava o
+     scroll do mouse em vez de rolar a página (bug real, não só estético;
+     confirmado via getComputedStyle().overflowY e scrollHeight >
+     clientHeight durante a animação antes deste fix). */
+  overflow: hidden;
 }
 
 /* Textura ambiente — dois brilhos radiais bem diluídos (verde-ciano da
