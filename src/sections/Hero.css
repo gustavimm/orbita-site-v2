@@ -5,8 +5,11 @@
    nunca deixar mais de uma "gritar" ao mesmo tempo:
    1. Entrada do H1 ([data-reveal], useReveal) — mais perceptível, só uma vez.
    2. .hero__orbit — presença lateral constante, discreta.
-   3. .hero__ambient — textura de fundo, a mais sutil, quase imperceptível
-      num frame parado.
+   3. Textura de fundo, a mais sutil — .hero__ambient (CSS puro, sempre
+      presente) por baixo; .hero__ambient-shader (WebGL, MeshGradient via
+      AmbientShader.tsx) por cima quando suportado, desktop e sem
+      prefers-reduced-motion. Nunca os dois "ligados" ao mesmo tempo aos
+      olhos de quem vê — ou aparece o shader, ou aparece o CSS por baixo.
    ========================================================================== */
 
 .hero {
@@ -106,6 +109,25 @@
   .hero__ambient {
     animation: none;
   }
+}
+
+/* Canvas do MeshGradient — só existe no DOM quando AmbientShader.tsx já
+   confirmou WebGL2 + desktop + sem reduced-motion, então nenhuma media
+   query de segurança é necessária aqui (a decisão já foi tomada em JS).
+   Mesmo z-index/inset do .hero__ambient logo acima, mas depois dele no
+   DOM: cobre o CSS por cima, opaco (o shader preenche 100% do canvas,
+   sem stops transparentes como o radial-gradient), então a sutileza vem
+   inteira desta opacity. */
+.hero__ambient-shader {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+:root[data-theme='light'] .hero__ambient-shader {
+  opacity: 0.13;
 }
 
 .hero__inner {

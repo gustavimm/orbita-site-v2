@@ -1,7 +1,16 @@
+import { lazy, Suspense, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { OrbitSystem } from '../components/OrbitSystem'
 import { CTA_LABEL, CTA_TO } from '../content/site'
+import { canUseShader } from '../lib/canUseShader'
 import './Hero.css'
+
+// Lazy: o chunk (~25kb gzip, WebGL) só é baixado se canUseShader() já
+// confirmou que faz sentido tentar — mobile, reduced-motion e navegadores
+// sem WebGL2 nunca pagam esse download, não só o custo de execução.
+const AmbientShader = lazy(() =>
+  import('../components/AmbientShader').then((m) => ({ default: m.AmbientShader })),
+)
 
 /* Ícones de linha fina — mesmo vocabulário visual da órbita (arcos, pontos,
    nós, marcações técnicas), não uma biblioteca externa de ícones genéricos. */
@@ -55,9 +64,16 @@ const CAPABILITIES = [
 ]
 
 export function Hero() {
+  const [useShader] = useState(canUseShader)
+
   return (
     <section className="hero" id="top">
       <div className="hero__ambient" aria-hidden="true" />
+      {useShader ? (
+        <Suspense fallback={null}>
+          <AmbientShader />
+        </Suspense>
+      ) : null}
 
       <div className="hero__inner wrap grid">
         <div className="hero__content">
