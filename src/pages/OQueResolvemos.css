@@ -184,6 +184,48 @@
   transform: scaleX(1);
 }
 
+/* Feixe de transmissão — mesma extensão da linha (nó 1 ao nó 3), largura
+   total própria pra que translateX em % corresponda direto à extensão da
+   trilha (-100% = fora antes do nó 1, 100% = fora depois do nó 3). Só o
+   miolo do gradiente é opaco; o resto é transparente, então o "corte" no
+   fim do loop (100% -> -100%) acontece com o trecho visível já fora da
+   área, sem salto perceptível. overflow:hidden é só contenção, não faz
+   parte do efeito. */
+.resolve-cta__steps-beam {
+  position: absolute;
+  top: calc(var(--node) / 2 - 1px);
+  left: calc(100% / 6);
+  right: calc(100% / 6);
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.resolve-cta__steps-beam::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 42%,
+    var(--c-accent) 50%,
+    transparent 58%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: steps-beam-travel 5s ease-in-out infinite;
+}
+
+@keyframes steps-beam-travel {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 .resolve-cta__steps-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -218,10 +260,112 @@
   color: var(--c-accent);
 }
 
+/* Pulso do nó — dispara quando o feixe (5s de loop) chega em cada nó. Sem
+   JS calculando posição: aproxima o instante via animation-delay (nó 1 a
+   1/4 do loop, nó 2 na metade, nó 3 a 3/4 — o feixe cruza a trilha toda de
+   -100% a 100%, então essas frações batem com o centro de cada nó). Cada
+   ripple usa a mesma duração do loop do feixe (5s) mas só fica visível nos
+   primeiros 20% (~1s) — o resto do ciclo fica parado e invisível até o
+   feixe voltar a passar. */
+.resolve-cta__step-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: var(--hairline) solid var(--c-accent);
+  opacity: 0;
+  pointer-events: none;
+  animation: steps-node-ripple 5s ease-out infinite;
+}
+
+.resolve-cta__step:nth-child(1) .resolve-cta__step-icon::after {
+  animation-delay: 1.25s;
+}
+
+.resolve-cta__step:nth-child(2) .resolve-cta__step-icon::after {
+  animation-delay: 2.5s;
+}
+
+.resolve-cta__step:nth-child(3) .resolve-cta__step-icon::after {
+  animation-delay: 3.75s;
+}
+
+@keyframes steps-node-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  20% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  20.01%,
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Microórbita do hover — um ponto só, desenhado via radial-gradient no
+   topo do próprio pseudo-elemento (sem elemento extra), girando ao redor
+   do centro do nó. O glifo do ícone (svg) nunca gira — só ganha
+   scale+drop-shadow, ver .resolve-cta__step-icon svg abaixo. */
+.resolve-cta__step-icon::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: radial-gradient(circle 2.5px at 50% 0%, var(--c-accent) 100%, transparent 100%);
+  opacity: 0;
+  transform: rotate(0deg);
+  transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease);
+  pointer-events: none;
+}
+
 .resolve-cta__step-icon svg {
   width: 16px;
   height: 16px;
   display: block;
+  transition: transform var(--t-base) var(--ease), filter var(--t-base) var(--ease);
+}
+
+@media (hover: hover) {
+  .resolve-cta__step:hover .resolve-cta__step-icon::before {
+    opacity: 1;
+    animation: steps-node-orbit 2.2s linear infinite;
+  }
+
+  .resolve-cta__step:hover .resolve-cta__step-icon svg {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(0, 230, 168, 0.4));
+  }
+}
+
+@keyframes steps-node-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resolve-cta__steps-beam::after {
+    animation: none;
+  }
+
+  .resolve-cta__step-icon::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  /* A microórbita inteira depende de girar — sem rotação ela não faz
+     sentido como efeito, então some por completo (o hover mantém só
+     scale+drop-shadow do ícone, que não é um loop contínuo). */
+  .resolve-cta__step-icon::before {
+    display: none;
+  }
 }
 
 .resolve-cta__step-label {

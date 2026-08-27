@@ -145,6 +145,7 @@ export default function OQueResolvemos() {
             style={{ transitionDelay: '240ms' }}
           >
             <span className="resolve-cta__steps-line" aria-hidden="true" />
+            <span className="resolve-cta__steps-beam" aria-hidden="true" />
             <ol className="resolve-cta__steps-list">
               {DECISION_STEPS.map(({ label, Icon }) => (
                 <li className="resolve-cta__step" key={label}>
