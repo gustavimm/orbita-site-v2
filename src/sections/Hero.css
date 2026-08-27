@@ -1,7 +1,7 @@
 /* ==========================================================================
    Hero — primeira dobra. Muito espaço vazio, conteúdo em 6 colunas; a
-   órbita não ocupa coluna própria — vive como fundo atrás de todo o
-   bloco de conteúdo (título, parágrafo, CTA).
+   órbita não ocupa coluna própria — vive como fundo atrás de todo o hero
+   (conteúdo + espaço vazio à direita), não só de uma coluna.
    ========================================================================== */
 
 .hero {
@@ -18,36 +18,36 @@
 }
 
 .hero__inner {
+  position: relative;
+  isolation: isolate;
   flex: 1;
   align-items: center;
   row-gap: clamp(56px, 9vw, 88px);
 }
 
 .hero__content {
-  position: relative;
-  isolation: isolate;
   grid-column: 1 / span 6;
 }
 
-/* Símbolo da órbita como fundo de todo o bloco de conteúdo — título,
-   parágrafo de apoio e CTA — não só do H1. Um anel só, centralizado com
-   viés pra direita (onde antes ficava a versão lateral em coluna própria;
-   as duas nunca coexistem mais). z-index negativo dentro da stacking
-   context isolada de .hero__content (isolation acima) garante que fica
-   atrás de todo o conteúdo sem depender da ordem de pintura dos irmãos.
-   aspect-ratio mantém o círculo sem distorcer a geometria (elipses já
-   inclinadas dentro do próprio viewBox) mesmo num container retangular. */
+/* Símbolo da órbita como fundo de todo o hero — título, parágrafo de apoio
+   e CTA, mais o espaço vazio à direita do conteúdo (onde antes ficava a
+   versão lateral em coluna própria; as duas nunca coexistem mais). % de
+   largura/posição relativas a .hero__inner (a caixa "wrap" do hero
+   inteiro), não de .hero__content (só a metade esquerda) — senão o anel
+   nunca alcançaria a direita como pedido. z-index negativo dentro da
+   stacking context isolada de .hero__inner (isolation acima) garante que
+   fica atrás de todo o conteúdo sem depender da ordem de pintura dos
+   irmãos. aspect-ratio mantém o círculo sem distorcer a geometria
+   (elipses já inclinadas dentro do próprio viewBox). */
 .hero__bg-orbit {
   position: absolute;
   top: 42%;
   left: 58%;
-  width: 135%;
+  width: 96%;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   z-index: -1;
-  /* Valor de calibração temporário — bem acima do que deve ficar no final —
-     só pra confirmar visualmente que o traço aparece antes de ajustar pra
-     baixo. */
+  /* Confirmado visualmente neste patamar — não mexer sem pedido explícito. */
   opacity: 0.4;
   pointer-events: none;
 }
@@ -176,13 +176,11 @@
     grid-column: 1 / span 6;
   }
 
-  /* .hero__content passa a ocupar a largura toda do grid aqui (6 de 6
-     colunas) — sem a coluna lateral livre do desktop, menos viés pra
-     direita faz mais sentido. */
+  /* left/width vêm da regra base — já são relativos a .hero__inner (a
+     largura toda do hero), então continuam corretos aqui. Só o centro
+     vertical muda um pouco. */
   .hero__bg-orbit {
     top: 40%;
-    left: 52%;
-    width: 118%;
   }
 
   .hero__rail-item {
@@ -215,12 +213,8 @@
     letter-spacing: -0.035em;
   }
 
-  /* Centralizado e mais contido: sem a coluna lateral livre pra puxar o
-     viés, e menos margem de sobra pra não invadir o gutter. */
   .hero__bg-orbit {
     top: 38%;
-    left: 50%;
-    width: 105%;
   }
 
   .hero__lead {
