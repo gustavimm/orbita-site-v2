@@ -49,11 +49,11 @@ export const PROBLEMS = [
   {
     title: 'Informação espalhada',
     when: [
-      'Mesmo cliente em três lugares — WhatsApp, e-mail, planilha, cada um com sua versão',
+      'Mesmo cliente em três lugares, cada um com sua versão',
       'Dois sistemas mostram números diferentes e ninguém sabe qual vale',
       'Uma pergunta simples exige abrir três lugares pra responder',
     ],
-    build: 'Um lugar único onde cadastro, histórico e sistemas conversam — o dado é digitado uma vez só.',
+    build: 'Um lugar único onde cadastro e histórico ficam sempre atualizados.',
   },
   {
     title: 'Trabalho manual repetido',
