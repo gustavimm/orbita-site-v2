@@ -51,14 +51,17 @@
   height: 3.6em;
   transform: translate(-50%, -50%);
   z-index: -1;
-  opacity: 0.16;
+  /* Valor de calibração temporário — bem acima do que deve ficar no final —
+     só pra confirmar visualmente que o traço aparece antes de ajustar pra
+     baixo. Ver comentário em Hero.tsx/PR: reduzir depois da confirmação. */
+  opacity: 0.4;
   pointer-events: none;
 }
 
 :root[data-theme='light'] .hero__title-orbit {
   /* Traço escuro sobre texto escuro precisa de mais folga que traço claro
      sobre texto claro — mesmo raciocínio do --c-accent mais denso no claro. */
-  opacity: 0.1;
+  opacity: 0.28;
 }
 
 .hero__title-dot {

@@ -1,3 +1,5 @@
+import './OrbitSystem.css'
+
 const CENTER = 240
 
 function pointOnCircle(radius: number, angleDeg: number) {
