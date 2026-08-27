@@ -1,6 +1,6 @@
 /* ==========================================================================
    O que resolvemos — página de diagnóstico.
-   Seis situações, cada uma um cartão compacto: título, sinais, resposta.
+   Quatro situações, cada uma um cartão compacto: título, sinais, resposta.
    ========================================================================== */
 
 /* --- Abertura ----------------------------------------------------------------
@@ -96,9 +96,9 @@
 }
 
 /* --- Barra de acento -------------------------------------------------------------
-   Com 6 cards visíveis ao mesmo tempo, a barra sempre acesa anula o próprio
-   destaque. Fica invisível em repouso e só aparece no hover — reforça a
-   interação em vez de decorar todos os cards ao mesmo tempo.
+   Com vários cards visíveis ao mesmo tempo, a barra sempre acesa anula o
+   próprio destaque. Fica invisível em repouso e só aparece no hover —
+   reforça a interação em vez de decorar todos os cards ao mesmo tempo.
    ----------------------------------------------------------------------------- */
 
 .resolve__card::after {

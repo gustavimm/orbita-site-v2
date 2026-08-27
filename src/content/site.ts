@@ -47,41 +47,23 @@ export const PROBLEMS = [
     build: 'Um sistema com as mesmas contas e regras, mas com histórico e acesso por pessoa.',
   },
   {
-    title: 'Informações espalhadas',
+    title: 'Informação espalhada',
     when: [
-      'Mesmo cliente espalhado entre WhatsApp, e-mail e planilha',
-      'Cada área usa a própria versão do dado',
-      'Uma pergunta simples exige abrir três lugares',
+      'Mesmo cliente em três lugares — WhatsApp, e-mail, planilha, cada um com sua versão',
+      'Dois sistemas mostram números diferentes e ninguém sabe qual vale',
+      'Uma pergunta simples exige abrir três lugares pra responder',
     ],
-    build: 'Um lugar único onde cadastro, histórico e documentos ficam sempre atualizados.',
+    build: 'Um lugar único onde cadastro, histórico e sistemas conversam — o dado é digitado uma vez só.',
   },
   {
-    title: 'Atendimento repetitivo',
+    title: 'Trabalho que devia rodar sozinho',
     when: [
-      'Mesmas perguntas todo dia, respostas iguais',
-      'Alguém para tudo pra repetir a mesma resposta',
-      'Primeiro contato depende de alguém disponível',
+      'A mesma sequência é refeita toda semana, na mão',
+      'As mesmas perguntas chegam todo dia, com respostas iguais',
+      'Se ninguém lembrar, a tarefa não acontece',
     ],
     build:
-      'Respostas automáticas para o previsível, com caminho aberto pra uma pessoa quando foge do padrão.',
-  },
-  {
-    title: 'Processos manuais',
-    when: [
-      'Mesma sequência refeita toda semana, na mão',
-      'Tarefa só acontece se alguém lembrar',
-      'Erro de digitação e retrabalho na rotina',
-    ],
-    build: 'Rotinas que rodam sozinhas, em horário definido ou a partir de um evento.',
-  },
-  {
-    title: 'Sistemas que não conversam',
-    when: [
-      'Mesmo dado digitado em duas ou três ferramentas',
-      'Dois sistemas mostram números diferentes',
-      'Exportação manual no meio do processo',
-    ],
-    build: 'Integração entre as ferramentas que você já usa — cadastro feito uma vez só.',
+      'Rotinas e respostas automáticas para o previsível, com caminho aberto pra uma pessoa assim que foge do padrão.',
   },
 ]
 
