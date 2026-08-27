@@ -12,6 +12,10 @@
 .video-text__visual {
   position: relative;
   display: inline-block;
+  /* Salvaguarda: mesmo que a máscara falhe (ex.: suporte inconsistente a
+     mask-image em navegador antigo), o vídeo nunca vaza visualmente pra
+     fora da caixa do texto. */
+  overflow: hidden;
 }
 
 /* Cor sólida --c-accent: base visível enquanto o vídeo carrega e fallback
@@ -24,6 +28,16 @@
   position: absolute;
   width: 0;
   height: 0;
+}
+
+/* Recebe a máscara (não o <video> diretamente — ver comentário no TSX). */
+.video-text__mask {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
 }
 
 .video-text__media {
