@@ -59,10 +59,11 @@ export function Hero() {
     <section className="hero" id="top">
       <div className="hero__inner wrap grid">
         <div className="hero__content">
+          <span className="hero__bg-orbit" aria-hidden="true">
+            <OrbitSystem />
+          </span>
+
           <h1 className="hero__title" data-reveal="" style={{ transitionDelay: '0ms' }}>
-            <span className="hero__title-orbit" aria-hidden="true">
-              <OrbitSystem />
-            </span>
             Seu negócio
             <br />
             no centro<span className="hero__title-dot">.</span>

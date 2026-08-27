@@ -1,6 +1,7 @@
 /* ==========================================================================
    Hero — primeira dobra. Muito espaço vazio, conteúdo em 6 colunas; a
-   órbita não ocupa coluna própria — vive como fundo atrás do H1.
+   órbita não ocupa coluna própria — vive como fundo atrás de todo o
+   bloco de conteúdo (título, parágrafo, CTA).
    ========================================================================== */
 
 .hero {
@@ -9,9 +10,9 @@
   min-height: 100svh;
   padding-top: clamp(128px, 17vh, 200px);
   padding-bottom: var(--sp-7);
-  /* Salvaguarda: o anel decorativo atrás do H1 (.hero__title-orbit) se
-     estende além da própria caixa do título de propósito — nunca deve
-     abrir rolagem horizontal por causa disso. */
+  /* Salvaguarda: o anel decorativo atrás do conteúdo (.hero__bg-orbit) se
+     estende além da própria caixa de propósito — nunca deve abrir rolagem
+     horizontal nem cortar de forma estranha em telas menores por causa disso. */
   overflow-x: hidden;
   overflow-y: visible;
 }
@@ -23,45 +24,48 @@
 }
 
 .hero__content {
+  position: relative;
+  isolation: isolate;
   grid-column: 1 / span 6;
+}
+
+/* Símbolo da órbita como fundo de todo o bloco de conteúdo — título,
+   parágrafo de apoio e CTA — não só do H1. Um anel só, centralizado com
+   viés pra direita (onde antes ficava a versão lateral em coluna própria;
+   as duas nunca coexistem mais). z-index negativo dentro da stacking
+   context isolada de .hero__content (isolation acima) garante que fica
+   atrás de todo o conteúdo sem depender da ordem de pintura dos irmãos.
+   aspect-ratio mantém o círculo sem distorcer a geometria (elipses já
+   inclinadas dentro do próprio viewBox) mesmo num container retangular. */
+.hero__bg-orbit {
+  position: absolute;
+  top: 42%;
+  left: 58%;
+  width: 135%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  /* Valor de calibração temporário — bem acima do que deve ficar no final —
+     só pra confirmar visualmente que o traço aparece antes de ajustar pra
+     baixo. */
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+:root[data-theme='light'] .hero__bg-orbit {
+  /* Traço escuro sobre texto escuro precisa de mais folga que traço claro
+     sobre texto claro — mesmo raciocínio do --c-accent mais denso no claro. */
+  opacity: 0.28;
 }
 
 /* --- Título ---------------------------------------------------------------- */
 
 .hero__title {
-  position: relative;
-  isolation: isolate;
   font-size: var(--fs-display);
   font-weight: var(--fw-bold);
   line-height: var(--lh-display);
   letter-spacing: var(--ls-display);
   text-wrap: nowrap;
-}
-
-/* Símbolo da órbita como fundo do H1 inteiro — um anel só, atrás do texto,
-   estendendo-se para a direita (onde antes ficava a versão lateral em
-   coluna própria; as duas nunca coexistem mais). z-index negativo dentro
-   da stacking context isolada do próprio H1 (isolation acima) garante que
-   fica atrás das letras sem depender da ordem de pintura dos irmãos. */
-.hero__title-orbit {
-  position: absolute;
-  top: 50%;
-  left: 58%;
-  width: 3.6em;
-  height: 3.6em;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  /* Valor de calibração temporário — bem acima do que deve ficar no final —
-     só pra confirmar visualmente que o traço aparece antes de ajustar pra
-     baixo. Ver comentário em Hero.tsx/PR: reduzir depois da confirmação. */
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-:root[data-theme='light'] .hero__title-orbit {
-  /* Traço escuro sobre texto escuro precisa de mais folga que traço claro
-     sobre texto claro — mesmo raciocínio do --c-accent mais denso no claro. */
-  opacity: 0.28;
 }
 
 .hero__title-dot {
@@ -172,6 +176,15 @@
     grid-column: 1 / span 6;
   }
 
+  /* .hero__content passa a ocupar a largura toda do grid aqui (6 de 6
+     colunas) — sem a coluna lateral livre do desktop, menos viés pra
+     direita faz mais sentido. */
+  .hero__bg-orbit {
+    top: 40%;
+    left: 52%;
+    width: 118%;
+  }
+
   .hero__rail-item {
     grid-column: span 3;
   }
@@ -202,12 +215,12 @@
     letter-spacing: -0.035em;
   }
 
-  /* Menos espaço pra sobrar sem invadir a margem — centralizado em vez de
-     puxado pra direita, e um pouco menor em relação ao texto. */
-  .hero__title-orbit {
+  /* Centralizado e mais contido: sem a coluna lateral livre pra puxar o
+     viés, e menos margem de sobra pra não invadir o gutter. */
+  .hero__bg-orbit {
+    top: 38%;
     left: 50%;
-    width: 3em;
-    height: 3em;
+    width: 105%;
   }
 
   .hero__lead {

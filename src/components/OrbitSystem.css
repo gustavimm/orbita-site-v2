@@ -1,7 +1,7 @@
 /* ==========================================================================
    Sistema orbital — elipses inclinadas, traços de 1px, movimento longo.
-   Usado como fundo decorativo atrás do H1 do Hero (ver Hero.css
-   .hero__title-orbit): opacidade e escala vêm de lá, não daqui.
+   Usado como fundo decorativo atrás do bloco de conteúdo do Hero (ver
+   Hero.css .hero__bg-orbit): opacidade e escala vêm de lá, não daqui.
    ========================================================================== */
 
 .orbit {
